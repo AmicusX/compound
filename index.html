@@ -12,116 +12,108 @@
 <link id="favIcon" rel="icon">
 <style>
 :root{
-  --bg:#070B14;--bg2:#0B1220;--sur:#101A2C;--sur2:#152238;--ovl:#1C2D49;
-  --line:rgba(126,166,212,.16);--line2:rgba(126,166,212,.3);
-  --text:#EAF2FF;--muted:#91A7C4;--faint:#5F7391;
-  --green:#2EE59D;--green2:#0FA968;--red:#FF5C6C;--gold:#F5C451;
-  --blue:#4DA6FF;--violet:#A98BFF;--magenta:#F06BD3;--teal:#35D0C0;
-  --sat:env(safe-area-inset-top,0px);--sab:env(safe-area-inset-bottom,0px);
+ --bg:#070B14;--bg2:#0B1220;--sur:#101A2C;--sur2:#152238;--ovl:#1C2D49;
+ --line:rgba(126,166,212,.16);--line2:rgba(126,166,212,.32);
+ --text:#EAF2FF;--muted:#91A7C4;--faint:#5F7391;
+ --green:#2EE59D;--red:#FF5C6C;--gold:#F5C451;--blue:#4DA6FF;
+ --violet:#A98BFF;--magenta:#F06BD3;--teal:#35D0C0;--orange:#FF9A3D;
+ --sat:env(safe-area-inset-top,0px);--sab:env(safe-area-inset-bottom,0px)
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
-  background:var(--bg);color:var(--text);overflow:hidden;touch-action:manipulation;
-  -webkit-font-smoothing:antialiased;
-}
-button,input,select,textarea{font:inherit;color:inherit}
-button{border:0;background:none;cursor:pointer}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);overflow:hidden;touch-action:manipulation;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}button{border:0;background:none;cursor:pointer}
+input,select,textarea{color-scheme:dark}
 :focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:10px}
-.bg{position:fixed;inset:-15%;z-index:0;pointer-events:none;
-  background:
-   radial-gradient(40% 32% at 12% 8%,rgba(46,229,157,.16),transparent 70%),
-   radial-gradient(38% 30% at 90% 12%,rgba(77,166,255,.14),transparent 70%),
-   radial-gradient(46% 36% at 70% 96%,rgba(245,196,81,.1),transparent 70%),
-   linear-gradient(160deg,#0A1324 0%,#070B14 58%,#0A101C 100%);
-  animation:drift 28s ease-in-out infinite alternate}
+.bg{position:fixed;inset:-15%;z-index:0;pointer-events:none;background:radial-gradient(40% 32% at 12% 8%,rgba(46,229,157,.16),transparent 70%),radial-gradient(38% 30% at 90% 12%,rgba(77,166,255,.14),transparent 70%),radial-gradient(46% 36% at 70% 96%,rgba(245,196,81,.1),transparent 70%),linear-gradient(160deg,#0A1324,#070B14 58%,#0A101C);animation:drift 28s ease-in-out infinite alternate}
 @keyframes drift{to{transform:translate(2%,-2%) scale(1.04)}}
-.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.05;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E")}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E")}
 .candles{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.1;overflow:hidden}
-.candle{position:absolute;width:8px;border-radius:4px;animation:floatCandle 18s ease-in-out infinite alternate}
+.candle{position:absolute;width:8px;border-radius:4px;animation:floatC 18s ease-in-out infinite alternate}
 .candle:before,.candle:after{content:"";position:absolute;left:3px;width:2px;background:inherit}
 .candle:before{top:-18px;height:18px}.candle:after{bottom:-18px;height:18px}
-@keyframes floatCandle{to{transform:translateY(-24px)}}
+@keyframes floatC{to{transform:translateY(-24px)}}
 #app{position:fixed;inset:0;z-index:2;display:flex;flex-direction:column;max-width:500px;margin:0 auto}
 @media(min-width:620px){#app{border-inline:1px solid var(--line)}}
 .ticker{height:25px;overflow:hidden;border-bottom:1px solid var(--line);background:rgba(7,11,20,.8);font-size:10px;letter-spacing:.8px;color:var(--muted);white-space:nowrap}
-.ticker-track{display:inline-flex;gap:28px;padding:6px 14px;animation:ticker 24s linear infinite}
-.ticker b{color:var(--green);font-weight:800}.ticker .gold{color:var(--gold)}.ticker .red{color:var(--red)}
+.ticker-track{display:inline-flex;gap:26px;padding:6px 14px;animation:ticker 26s linear infinite}
+.ticker b{color:var(--green)}.ticker .gold{color:var(--gold)}.ticker .blue{color:var(--blue)}
 @keyframes ticker{to{transform:translateX(-50%)}}
-.top{display:flex;align-items:center;justify-content:space-between;padding:calc(9px + var(--sat)) 16px 9px;border-bottom:1px solid var(--line);background:rgba(8,13,24,.78);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4)}
-.brand{display:flex;align-items:center;gap:9px;font-weight:900;font-size:18px;letter-spacing:.2px}
+.top{display:flex;align-items:center;justify-content:space-between;padding:calc(9px + var(--sat)) 15px 9px;border-bottom:1px solid var(--line);background:rgba(8,13,24,.8);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:900;font-size:18px}
 .logo{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(140deg,var(--green),var(--teal));color:#052018;box-shadow:0 0 18px rgba(46,229,157,.35)}
 .brand small{color:var(--gold)}
 .top-actions{display:flex;gap:7px}
-.icon-btn{width:34px;height:34px;border-radius:11px;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted);background:var(--sur)}
+.icon-btn{width:34px;height:34px;border-radius:11px;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted);background:var(--sur);font-size:15px}
 .icon-btn:active{transform:scale(.9)}
+.icon-btn.spin{animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 main{flex:1;min-height:0;position:relative}
-.panel{display:none;height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:15px 15px 122px}
+.panel{display:none;height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:15px 15px 124px}
 .panel.active{display:block;animation:panelIn .38s cubic-bezier(.22,1,.36,1)}
 @keyframes panelIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .panel::-webkit-scrollbar,.scroll::-webkit-scrollbar{width:5px}
 .panel::-webkit-scrollbar-track,.scroll::-webkit-scrollbar-track{background:transparent}
-.panel::-webkit-scrollbar-thumb,.scroll::-webkit-scrollbar-thumb{background:rgba(77,166,255,.28);border-radius:99px}
-.panel::-webkit-scrollbar-thumb:hover,.scroll::-webkit-scrollbar-thumb:hover{background:rgba(77,166,255,.55)}
+.panel::-webkit-scrollbar-thumb,.scroll::-webkit-scrollbar-thumb{background:rgba(77,166,255,.3);border-radius:99px}
+.panel::-webkit-scrollbar-thumb:hover,.scroll::-webkit-scrollbar-thumb:hover{background:rgba(77,166,255,.6)}
 .hscroll{overflow-x:auto;scrollbar-width:none}.hscroll::-webkit-scrollbar{height:3px}.hscroll::-webkit-scrollbar-thumb{background:rgba(245,196,81,.35);border-radius:99px}
 .card{background:linear-gradient(165deg,var(--sur2),var(--sur));border:1px solid var(--line);border-radius:20px;padding:17px;margin-bottom:13px;box-shadow:0 14px 34px rgba(0,0,0,.35);animation:cardIn .5s cubic-bezier(.22,1,.36,1) both}
-.card:nth-child(2){animation-delay:.05s}.card:nth-child(3){animation-delay:.1s}.card:nth-child(4){animation-delay:.15s}
 @keyframes cardIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-.card h3{font-size:15px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
-.link{color:var(--blue);font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:3px}
-.mini{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--faint);margin:14px 0 8px}
-.hero{background:radial-gradient(120% 130% at 100% 0%,rgba(245,196,81,.13),transparent 55%),linear-gradient(150deg,#142B31 0%,#102033 60%,#0D1728 100%);border-color:var(--line2)}
+.card h3{font-size:15px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.link{color:var(--blue);font-size:12px;font-weight:800}
+.mini{font-size:10px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;color:var(--faint);margin:14px 0 8px}
+.hero{background:radial-gradient(120% 130% at 100% 0%,rgba(245,196,81,.13),transparent 55%),linear-gradient(150deg,#142B31,#102033 60%,#0D1728);border-color:var(--line2)}
 .hero-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
-.lbl{font-size:11px;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;font-weight:800}
-.countdown{font-size:38px;font-weight:900;letter-spacing:-1px;margin:6px 0 4px;font-variant-numeric:tabular-nums}
+.lbl{font-size:11px;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;font-weight:900}
+.countdown{font-size:36px;font-weight:900;letter-spacing:-1px;margin:6px 0 4px;font-variant-numeric:tabular-nums}
 .countdown.due{color:var(--gold);animation:pulse 1.4s ease-in-out infinite}
 @keyframes pulse{50%{opacity:.55}}
-.next-title{font-size:16px;font-weight:800;line-height:1.3;margin:8px 0 4px}
+.next-title{font-size:16px;font-weight:900;line-height:1.3;margin:8px 0 4px}
 .next-meta{font-size:12px;color:var(--muted)}
-.ring{width:86px;height:86px;position:relative;flex:none}
+.ring{width:84px;height:84px;position:relative;flex:none}
 .ring svg{width:100%;height:100%;transform:rotate(-90deg)}
-.ring circle{fill:none;stroke-width:8}
-.ring .tr{stroke:rgba(255,255,255,.07)}
+.ring circle{fill:none;stroke-width:8}.ring .tr{stroke:rgba(255,255,255,.07)}
 .ring .pr{stroke:var(--green);stroke-linecap:round;transition:stroke-dashoffset .8s ease}
 .ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:11px;color:var(--muted);text-align:center;line-height:1.2}
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border-radius:15px;font-size:15px;font-weight:900;transition:.15s}
 .btn:active{transform:scale(.97)}
 .btn.primary{background:linear-gradient(140deg,#65F2BB,var(--green) 50%,var(--teal));color:#052018;box-shadow:0 8px 24px rgba(46,229,157,.28)}
 .btn.gold{background:linear-gradient(140deg,#FFE08A,var(--gold));color:#3A2A05;box-shadow:0 8px 24px rgba(245,196,81,.25)}
+.btn.blue{background:linear-gradient(140deg,#8CC8FF,var(--blue));color:#061525;box-shadow:0 8px 24px rgba(77,166,255,.25)}
 .btn.ghost{border:1px solid var(--line);background:var(--sur);color:var(--text)}
 .btn.danger{border:1px solid rgba(255,92,108,.4);background:rgba(255,92,108,.07);color:var(--red)}
+.btn:disabled{opacity:.4}
 .btn-row{display:flex;gap:9px}.btn-row .btn{padding:12px;font-size:13px}
 .stats{display:flex;gap:9px;margin-top:14px}
 .stat{flex:1;border:1px solid var(--line);border-radius:14px;padding:10px;background:rgba(255,255,255,.025)}
 .stat i{display:block;font-style:normal;font-size:10px;color:var(--muted);margin-bottom:4px}
 .stat b{font-size:17px;font-variant-numeric:tabular-nums}
 .stat small{font-size:10px;color:var(--faint)}
-.queue-row,.lesson-row{display:flex;align-items:center;gap:10px;padding:10px 6px;border-radius:14px;cursor:pointer;transition:.15s;animation:rowIn .4s ease both;animation-delay:calc(var(--i,0)*30ms)}
+.row{display:flex;align-items:center;gap:10px;padding:10px 6px;border-radius:14px;cursor:pointer;transition:.15s;animation:rowIn .4s ease both;animation-delay:calc(var(--i,0)*28ms)}
 @keyframes rowIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
-.queue-row:active,.lesson-row:active{background:rgba(77,166,255,.08)}
+.row:active{background:rgba(77,166,255,.08)}
 .tile{width:42px;height:42px;min-width:42px;border-radius:13px;display:grid;place-items:center;font-size:20px}
 .mid{flex:1;min-width:0}
-.mid b{display:block;font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mid b{display:block;font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mid i{display:block;font-style:normal;font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .badge{font-size:10px;font-weight:900;padding:4px 8px;border-radius:99px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
 .badge.done{color:var(--green);border-color:rgba(46,229,157,.35);background:rgba(46,229,157,.08)}
 .badge.new{color:var(--blue);border-color:rgba(77,166,255,.35);background:rgba(77,166,255,.08)}
-.badge.mine{color:var(--gold);border-color:rgba(245,196,81,.35);background:rgba(245,196,81,.08)}
+.badge.local{color:var(--gold);border-color:rgba(245,196,81,.35);background:rgba(245,196,81,.08)}
+.badge.db{color:var(--teal);border-color:rgba(53,208,192,.35);background:rgba(53,208,192,.08)}
 .title-row{display:flex;align-items:center;gap:8px;margin-bottom:12px}
 .title-row h2{font-size:22px;font-weight:900}
 .spacer{flex:1}
 .pill{font-size:11px;color:var(--green);background:rgba(46,229,157,.1);border:1px solid rgba(46,229,157,.25);padding:3px 9px;border-radius:99px}
 .search{display:flex;align-items:center;gap:8px;background:var(--sur);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:10px;color:var(--muted)}
-.search input{flex:1;background:none;border:0;font-size:15px;color:var(--text)}
-.search input:focus{outline:none}.search input::placeholder{color:var(--faint)}
+.search input{flex:1;background:none;border:0;font-size:15px;color:var(--text)}.search input:focus{outline:none}.search input::placeholder{color:var(--faint)}
 .chips{display:flex;gap:8px;padding-bottom:8px}
-.chip{padding:8px 13px;border-radius:99px;border:1px solid var(--line);background:var(--sur);font-size:12px;font-weight:700;color:var(--muted);white-space:nowrap}
+.chip{padding:8px 13px;border-radius:99px;border:1px solid var(--line);background:var(--sur);font-size:12px;font-weight:800;color:var(--muted);white-space:nowrap}
 .chip.on{background:var(--blue);border-color:var(--blue);color:#061525}
-.sel{background:var(--sur);border:1px solid var(--line);border-radius:99px;padding:8px 10px;font-size:12px;color:var(--muted);max-width:150px}
+.chip.gold{color:var(--gold);border-color:rgba(245,196,81,.35)}
+.sel{background:var(--sur);border:1px solid var(--line);border-radius:99px;padding:8px 10px;font-size:12px;color:var(--muted);max-width:160px}
 .bulk{display:flex;align-items:center;gap:8px;background:var(--ovl);border:1px solid var(--line2);border-radius:14px;padding:8px 12px;margin:8px 0;font-size:13px}
-.mini-btn{padding:7px 11px;border-radius:10px;font-size:12px;font-weight:800;border:1px solid var(--line);color:var(--muted)}
+.mini-btn{padding:7px 11px;border-radius:10px;font-size:12px;font-weight:900;border:1px solid var(--line);color:var(--muted)}
 .mini-btn.danger{color:var(--red);border-color:rgba(255,92,108,.4)}
 .mini-btn:active{transform:scale(.94)}
 .chk{width:22px;height:22px;min-width:22px;border-radius:7px;border:2px solid var(--line2);display:grid;place-items:center;color:#061525}
@@ -131,202 +123,163 @@ main{flex:1;min-height:0;position:relative}
 .tool:disabled{opacity:.25}.tool:active{transform:scale(.88)}
 .grip{color:var(--faint);cursor:grab}
 .seg{display:flex;background:var(--sur);border:1px solid var(--line);border-radius:14px;padding:4px;gap:4px}
-.seg button{flex:1;padding:9px;border-radius:10px;font-size:12px;font-weight:800;color:var(--muted)}
+.seg button{flex:1;padding:9px 6px;border-radius:10px;font-size:12px;font-weight:900;color:var(--muted)}
 .seg button.on{background:var(--ovl);color:var(--text)}
-.chart{width:100%;height:150px;display:block}
-.chart text{font-size:9px;fill:var(--faint)}
-.chart .grid{stroke:rgba(126,166,212,.12);stroke-width:1}
-.chart .line{fill:none;stroke:var(--green);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-.chart .area{fill:url(#xpGrad)}
+.chart{width:100%;height:150px;display:block}.chart text{font-size:9px;fill:var(--faint)}
+.chart .grid{stroke:rgba(126,166,212,.12)}.chart .line{fill:none;stroke:var(--green);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}.chart .area{fill:url(#xpGrad)}
 .heat{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
-.heat div{aspect-ratio:1;border-radius:5px;background:rgba(255,255,255,.05);position:relative}
-.heat div[data-l="1"]{background:rgba(46,229,157,.22)}
-.heat div[data-l="2"]{background:rgba(46,229,157,.42)}
-.heat div[data-l="3"]{background:rgba(46,229,157,.68)}
-.heat div[data-l="4"]{background:var(--green);box-shadow:0 0 8px rgba(46,229,157,.4)}
-.module-bar{margin:10px 0}
-.module-bar .topline{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
+.heat div{aspect-ratio:1;border-radius:5px;background:rgba(255,255,255,.05)}
+.heat div[data-l="1"]{background:rgba(46,229,157,.22)}.heat div[data-l="2"]{background:rgba(46,229,157,.42)}.heat div[data-l="3"]{background:rgba(46,229,157,.68)}.heat div[data-l="4"]{background:var(--green);box-shadow:0 0 8px rgba(46,229,157,.4)}
+.mbar{margin:11px 0}.mbar .tl{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
 .track{height:8px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden}
 .fill{height:100%;border-radius:99px;width:0;transition:width 1s cubic-bezier(.22,1,.36,1)}
 .tiles{display:flex;gap:10px;flex-wrap:wrap}
-.tile-stat{flex:1;min-width:130px;background:var(--sur);border:1px solid var(--line);border-radius:16px;padding:12px}
-.tile-stat i{display:block;font-style:normal;font-size:10px;color:var(--muted);margin-bottom:5px}
-.tile-stat b{font-size:18px;font-variant-numeric:tabular-nums}
-.tile-stat small{display:block;font-size:10px;color:var(--faint);margin-top:3px}
+.tstat{flex:1;min-width:130px;background:var(--sur);border:1px solid var(--line);border-radius:16px;padding:12px}
+.tstat i{display:block;font-style:normal;font-size:10px;color:var(--muted);margin-bottom:5px}.tstat b{font-size:18px;font-variant-numeric:tabular-nums}.tstat small{display:block;font-size:10px;color:var(--faint);margin-top:3px}
 .badges{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
-.ach{border:1px solid var(--line);border-radius:15px;padding:11px 7px;text-align:center;background:var(--sur)}
-.ach .e{font-size:24px;display:block;margin-bottom:5px}
-.ach b{font-size:10px;display:block}
-.ach.lock{opacity:.38;filter:grayscale(1)}
+.ach{border:1px solid var(--line);border-radius:15px;padding:11px 7px;text-align:center;background:var(--sur)}.ach .e{font-size:24px;display:block;margin-bottom:5px}.ach b{font-size:10px;display:block}.ach.lock{opacity:.38;filter:grayscale(1)}
 .set-card{background:var(--sur);border:1px solid var(--line);border-radius:18px;padding:15px;margin-bottom:12px}
 .set-card h4{font-size:12px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.9px;margin-bottom:12px}
-.set-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 0}
-.set-row label{font-size:14px}
-.input{background:var(--ovl);border:1px solid var(--line);border-radius:11px;padding:9px 12px;font-size:14px;color:var(--text)}
+.set-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 0}.set-row label{font-size:14px}
+.input{background:var(--ovl);border:1px solid var(--line);border-radius:11px;padding:10px 12px;font-size:14px;color:var(--text)}
 .input:focus{outline:none;border-color:var(--blue)}
-select.input{max-width:150px}
-textarea.input{width:100%;min-height:110px;resize:vertical;line-height:1.5}
+textarea.input{width:100%;min-height:110px;resize:vertical;line-height:1.5;font-size:13px}
 .data-btns{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.data-btn{display:flex;align-items:center;justify-content:center;gap:7px;padding:12px;border-radius:13px;border:1px solid var(--line);background:var(--ovl);font-size:12px;font-weight:800}
-.data-btn:active{transform:scale(.96)}
-.data-btn.gold{color:var(--gold);border-color:rgba(245,196,81,.35)}
-.data-btn.danger{color:var(--red);border-color:rgba(255,92,108,.35)}
+.data-btn{display:flex;align-items:center;justify-content:center;gap:7px;padding:12px 8px;border-radius:13px;border:1px solid var(--line);background:var(--ovl);font-size:12px;font-weight:900;text-align:center}
+.data-btn:active{transform:scale(.96)}.data-btn.gold{color:var(--gold);border-color:rgba(245,196,81,.35)}.data-btn.danger{color:var(--red);border-color:rgba(255,92,108,.35)}.data-btn.blue{color:var(--blue);border-color:rgba(77,166,255,.35)}
 .about{font-size:11px;color:var(--faint);line-height:1.6;text-align:center;padding:6px 0}
-.tabbar{display:flex;border-top:1px solid var(--line);background:rgba(8,13,24,.88);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);padding:6px 6px calc(8px + var(--sab));z-index:20}
-.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 2px;color:var(--faint);font-size:10px;font-weight:700;border-radius:12px}
-.tab.on{color:var(--green)}
-.tab .dot{width:4px;height:4px;border-radius:50%;background:var(--green);opacity:0;transform:scale(0);transition:.25s;box-shadow:0 0 8px var(--green)}
-.tab.on .dot{opacity:1;transform:scale(1)}
+.status{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px}
+.status .dot{width:8px;height:8px;border-radius:50%;background:var(--faint);flex:none}
+.status.ok .dot{background:var(--green);box-shadow:0 0 8px var(--green)}
+.status.err .dot{background:var(--red)}.status.load .dot{background:var(--gold);animation:pulse 1s infinite}
+.tabbar{display:flex;border-top:1px solid var(--line);background:rgba(8,13,24,.9);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);padding:6px 6px calc(8px + var(--sab));z-index:20}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 2px;color:var(--faint);font-size:10px;font-weight:800;border-radius:12px}
+.tab.on{color:var(--green)}.tab .dot{width:4px;height:4px;border-radius:50%;background:var(--green);opacity:0;transform:scale(0);transition:.25s;box-shadow:0 0 8px var(--green)}.tab.on .dot{opacity:1;transform:scale(1)}
 .fab-slot{flex:1;display:grid;place-items:center}
-.fab{width:56px;height:56px;border-radius:50%;margin-top:-26px;display:grid;place-items:center;color:#052018;background:linear-gradient(140deg,#65F2BB,var(--green) 45%,var(--teal));box-shadow:0 8px 26px rgba(46,229,157,.45),0 0 0 5px rgba(46,229,157,.1)}
+.fab{width:56px;height:56px;border-radius:50%;margin-top:-26px;display:grid;place-items:center;color:#052018;font-size:20px;background:linear-gradient(140deg,#65F2BB,var(--green) 45%,var(--teal));box-shadow:0 8px 26px rgba(46,229,157,.45),0 0 0 5px rgba(46,229,157,.1)}
 .fab:active{transform:scale(.9)}
-.due-banner{position:fixed;left:14px;right:14px;top:calc(78px + var(--sat));max-width:472px;margin:0 auto;z-index:60;display:none;align-items:center;gap:10px;background:linear-gradient(140deg,#2A2410,#1B2D2A);border:1px solid rgba(245,196,81,.45);border-radius:16px;padding:12px 14px;box-shadow:0 16px 44px rgba(0,0,0,.5)}
+.due-banner{position:fixed;left:14px;right:14px;top:calc(80px + var(--sat));max-width:472px;margin:0 auto;z-index:60;display:none;align-items:center;gap:10px;background:linear-gradient(140deg,#2A2410,#1B2D2A);border:1px solid rgba(245,196,81,.45);border-radius:16px;padding:12px 14px;box-shadow:0 16px 44px rgba(0,0,0,.5)}
 .due-banner.show{display:flex;animation:dropIn .4s cubic-bezier(.22,1,.36,1)}
 @keyframes dropIn{from{opacity:0;transform:translateY(-16px)}}
-.due-banner .e{font-size:22px}.due-banner span{flex:1;font-size:13px;font-weight:700}.due-banner small{display:block;color:var(--muted);font-weight:500;font-size:11px}
-.sheet{position:fixed;inset:0;z-index:100;display:none}
-.sheet.open{display:block}
-.backdrop{position:absolute;inset:0;background:rgba(3,7,14,.7);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);animation:fadeIn .25s}
+.due-banner .e{font-size:22px}.due-banner span{flex:1;font-size:13px;font-weight:800}.due-banner small{display:block;color:var(--muted);font-weight:500;font-size:11px}
+.sheet{position:fixed;inset:0;z-index:100;display:none}.sheet.open{display:block}
+.backdrop{position:absolute;inset:0;background:rgba(3,7,14,.72);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);animation:fadeIn .25s}
 @keyframes fadeIn{from{opacity:0}}
 .sheet-card{position:absolute;left:0;right:0;bottom:0;max-width:500px;margin:0 auto;background:linear-gradient(180deg,var(--ovl),var(--bg2));border:1px solid var(--line2);border-bottom:0;border-radius:26px 26px 0 0;max-height:calc(100dvh - 24px);display:flex;flex-direction:column;animation:up .38s cubic-bezier(.22,1,.36,1);box-shadow:0 -22px 60px rgba(0,0,0,.55)}
 @keyframes up{from{transform:translateY(100%)}}
-.sheet.closing .sheet-card{animation:down .22s ease forwards}
-@keyframes down{to{transform:translateY(100%)}}
-.sheet.closing .backdrop{animation:fadeOut .22s forwards}
-@keyframes fadeOut{to{opacity:0}}
+.sheet.closing .sheet-card{animation:down .22s ease forwards}@keyframes down{to{transform:translateY(100%)}}
+.sheet.closing .backdrop{animation:fadeOut .22s forwards}@keyframes fadeOut{to{opacity:0}}
 .sheet-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 8px;position:relative}
 .gripbar{position:absolute;top:7px;left:50%;transform:translateX(-50%);width:38px;height:4px;border-radius:99px;background:var(--line2)}
 .sheet-head h3{font-size:17px;font-weight:900;padding-top:6px}
 .sheet-body{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:6px 18px 14px;flex:1;min-height:0}
 .sheet-foot{padding:10px 18px calc(14px + var(--sab));border-top:1px solid var(--line)}
-.form-grid{display:grid;gap:10px}
-.form-grid label{font-size:11px;color:var(--muted);font-weight:800}
-.form-grid .input,.form-grid textarea{width:100%;margin-top:5px}
+.form-grid{display:grid;gap:10px}.form-grid label{font-size:11px;color:var(--muted);font-weight:900}.form-grid .input,.form-grid select{width:100%;margin-top:5px}
 .lesson-content p{font-size:15px;line-height:1.65;margin:10px 0;color:#DCE8FA}
 .lesson-content ul{margin:10px 0 10px 18px}.lesson-content li{font-size:14px;line-height:1.6;margin:6px 0;color:#DCE8FA}
 .note{border-left:3px solid var(--gold);background:rgba(245,196,81,.08);padding:11px 12px;border-radius:0 12px 12px 0;font-size:13px;line-height:1.55;margin:12px 0}
 .note.warn{border-color:var(--red);background:rgba(255,92,108,.08)}
 .formula{font-family:ui-monospace,Menlo,monospace;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px;font-size:13px;color:var(--gold);margin:12px 0;text-align:center}
-.candle-demo{display:flex;justify-content:center;gap:22px;padding:16px;background:var(--bg);border:1px solid var(--line);border-radius:14px;margin:12px 0}
-.cd{position:relative;width:20px;height:90px}
-.cd .wick{position:absolute;left:9px;top:0;width:2px;height:90px;background:var(--muted)}
-.cd .body{position:absolute;left:0;width:20px;border-radius:4px}
-.cd.up .body{background:var(--green);top:22px;height:42px}
-.cd.down .body{background:var(--red);top:30px;height:36px}
-.session{position:fixed;inset:0;z-index:120;display:none;background:var(--bg)}
-.session.open{display:flex;flex-direction:column;animation:fadeIn .25s}
-.session-top{display:flex;align-items:center;gap:10px;padding:calc(12px + var(--sat)) 16px 12px;border-bottom:1px solid var(--line);background:rgba(8,13,24,.9)}
-.session-top .mid b{font-size:15px}.session-top .mid i{font-size:11px}
+.session{position:fixed;inset:0;z-index:120;display:none;background:var(--bg)}.session.open{display:flex;flex-direction:column;animation:fadeIn .25s}
+.session-top{display:flex;align-items:center;gap:10px;padding:calc(12px + var(--sat)) 16px 12px;border-bottom:1px solid var(--line);background:rgba(8,13,24,.92)}
 .session-body{flex:1;overflow-y:auto;padding:18px 18px 30px;max-width:500px;width:100%;margin:0 auto}
 .session-foot{padding:12px 16px calc(14px + var(--sab));border-top:1px solid var(--line);max-width:500px;width:100%;margin:0 auto}
 .quiz-q{font-size:19px;font-weight:900;line-height:1.4;margin:18px 0}
 .option{display:block;width:100%;text-align:left;padding:14px;border-radius:14px;border:1px solid var(--line);background:var(--sur);font-size:14px;margin:9px 0;transition:.15s}
-.option:active{transform:scale(.98)}
-.option.correct{border-color:var(--green);background:rgba(46,229,157,.12);color:var(--green)}
-.option.wrong{border-color:var(--red);background:rgba(255,92,108,.12);color:var(--red)}
-.option:disabled{cursor:default}
+.option:active{transform:scale(.98)}.option.correct{border-color:var(--green);background:rgba(46,229,157,.12);color:var(--green)}.option.wrong{border-color:var(--red);background:rgba(255,92,108,.12);color:var(--red)}
 .explain{border-left:3px solid var(--blue);background:rgba(77,166,255,.08);padding:12px;border-radius:0 12px 12px 0;font-size:13px;line-height:1.55;margin:14px 0}
-.result{text-align:center;padding:30px 10px}
-.result .big{font-size:64px;margin-bottom:10px}
-.result h2{font-size:26px;font-weight:900;margin-bottom:8px}
-.result p{color:var(--muted);font-size:14px;line-height:1.6}
-.xp-pop{font-size:34px;font-weight:900;color:var(--gold);margin:18px 0;font-variant-numeric:tabular-nums}
-.modal{position:fixed;inset:0;z-index:150;display:none;align-items:center;justify-content:center;padding:28px}
-.modal.open{display:flex}
+.result{text-align:center;padding:26px 10px}.result .big{font-size:60px;margin-bottom:10px}.result h2{font-size:25px;font-weight:900;margin-bottom:8px}.result p{color:var(--muted);font-size:14px;line-height:1.6}
+.xp-pop{font-size:34px;font-weight:900;color:var(--gold);margin:16px 0;font-variant-numeric:tabular-nums}
+.modal{position:fixed;inset:0;z-index:150;display:none;align-items:center;justify-content:center;padding:28px}.modal.open{display:flex}
 .modal-card{position:relative;z-index:1;background:linear-gradient(180deg,var(--ovl),var(--sur));border:1px solid var(--line2);border-radius:22px;padding:22px;width:100%;max-width:340px;animation:pop .3s cubic-bezier(.34,1.56,.64,1);box-shadow:0 24px 60px rgba(0,0,0,.6)}
 @keyframes pop{from{opacity:0;transform:scale(.85)}}
-.modal-card h3{font-size:17px;margin-bottom:8px}
-.modal-card p{font-size:14px;color:var(--muted);line-height:1.5;margin-bottom:18px}
-#toast{position:fixed;left:15px;right:15px;bottom:calc(96px + var(--sab));max-width:470px;margin:0 auto;z-index:170;display:flex;align-items:center;gap:10px;background:var(--ovl);border:1px solid var(--line2);border-radius:16px;padding:13px 16px;font-size:13px;font-weight:700;box-shadow:0 14px 40px rgba(0,0,0,.5);transform:translateY(140%);opacity:0;transition:.35s cubic-bezier(.22,1,.36,1);pointer-events:none}
-#toast.show{transform:none;opacity:1;pointer-events:auto}
-#toast span{flex:1}
+.modal-card h3{font-size:17px;margin-bottom:8px}.modal-card p{font-size:14px;color:var(--muted);line-height:1.5;margin-bottom:18px}
+#toast{position:fixed;left:15px;right:15px;bottom:calc(96px + var(--sab));max-width:470px;margin:0 auto;z-index:170;display:flex;align-items:center;gap:10px;background:var(--ovl);border:1px solid var(--line2);border-radius:16px;padding:13px 16px;font-size:13px;font-weight:800;box-shadow:0 14px 40px rgba(0,0,0,.5);transform:translateY(140%);opacity:0;transition:.35s cubic-bezier(.22,1,.36,1);pointer-events:none}
+#toast.show{transform:none;opacity:1;pointer-events:auto}#toast span{flex:1}
 #toastAction{color:var(--gold);font-weight:900;font-size:12px;padding:6px 10px;border:1px solid rgba(245,196,81,.4);border-radius:10px;display:none}
-.empty{text-align:center;padding:34px 16px;color:var(--muted)}
-.empty .e{font-size:44px;display:block;margin-bottom:10px}
-.empty b{display:block;color:var(--text);font-size:15px;margin-bottom:4px}
-.empty p{font-size:13px;margin-bottom:14px}
+.empty{text-align:center;padding:32px 16px;color:var(--muted)}.empty .e{font-size:44px;display:block;margin-bottom:10px}.empty b{display:block;color:var(--text);font-size:15px;margin-bottom:4px}.empty p{font-size:13px;margin-bottom:14px}
+.err{color:var(--red);font-size:12px;min-height:16px}
 #confetti{position:fixed;inset:0;z-index:160;pointer-events:none}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <div class="bg"></div><div class="grain"></div><div class="candles" id="candles"></div>
-
 <div id="app">
-  <div class="ticker"><div class="ticker-track" id="ticker"></div></div>
-  <header class="top">
-    <div class="brand"><span class="logo">▲</span>Компаунд<small>.</small></div>
-    <div class="top-actions">
-      <button class="icon-btn" id="soundBtn" data-action="sound"></button>
-      <button class="icon-btn" data-action="tab" data-tab="settings">⚙</button>
-    </div>
-  </header>
-  <main>
-    <section class="panel" id="p-home"></section>
-    <section class="panel" id="p-library"></section>
-    <section class="panel" id="p-progress"></section>
-    <section class="panel" id="p-settings"></section>
-  </main>
-  <nav class="tabbar" id="tabbar"></nav>
+ <div class="ticker"><div class="ticker-track" id="ticker"></div></div>
+ <header class="top">
+  <div class="brand"><span class="logo">▲</span>Компаунд<small>.</small></div>
+  <div class="top-actions">
+   <button class="icon-btn" id="syncTop" data-action="sync">⟳</button>
+   <button class="icon-btn" id="soundBtn" data-action="sound">🔊</button>
+  </div>
+ </header>
+ <main>
+  <section class="panel" id="p-home"></section>
+  <section class="panel" id="p-library"></section>
+  <section class="panel" id="p-progress"></section>
+  <section class="panel" id="p-base"></section>
+ </main>
+ <nav class="tabbar" id="tabbar"></nav>
 </div>
 
 <div class="due-banner" id="dueBanner">
-  <span class="e">🔔</span>
-  <span>Пора учиться<small id="dueText">5–10 минут — и знания снова работают на вас</small></span>
-  <button class="mini-btn" data-action="snooze">30 мин</button>
-  <button class="mini-btn" style="color:var(--gold);border-color:rgba(245,196,81,.4)" data-action="start">Учить</button>
+ <span class="e">🔔</span><span>Пора учиться<small>Короткий урок — и знания снова работают на вас</small></span>
+ <button class="mini-btn" data-action="snooze">30 мин</button>
+ <button class="mini-btn" style="color:var(--gold);border-color:rgba(245,196,81,.4)" data-action="start">Учить</button>
 </div>
 
 <div class="session" id="session">
-  <div class="session-top">
-    <button class="icon-btn" data-action="s-close">✕</button>
-    <div class="mid"><b id="sTitle"></b><i id="sMeta"></i></div>
-    <span class="badge" id="sTimer">00:00</span>
-  </div>
-  <div class="session-body scroll" id="sBody"></div>
-  <div class="session-foot" id="sFoot"></div>
+ <div class="session-top">
+  <button class="icon-btn" data-action="s-close">✕</button>
+  <div class="mid"><b id="sTitle"></b><i id="sMeta"></i></div>
+  <span class="badge" id="sTimer">00:00</span>
+ </div>
+ <div class="session-body scroll" id="sBody"></div>
+ <div class="session-foot" id="sFoot"></div>
 </div>
 
 <div class="sheet" id="lessonSheet">
-  <div class="backdrop" data-action="close" data-sheet="lessonSheet"></div>
-  <div class="sheet-card">
-    <div class="sheet-head"><div class="gripbar"></div><h3>Урок</h3><button class="icon-btn" data-action="close" data-sheet="lessonSheet">✕</button></div>
-    <div class="sheet-body scroll" id="lessonBody"></div>
-    <div class="sheet-foot" id="lessonFoot"></div>
-  </div>
+ <div class="backdrop" data-action="close" data-sheet="lessonSheet"></div>
+ <div class="sheet-card">
+  <div class="sheet-head"><div class="gripbar"></div><h3>Урок</h3><button class="icon-btn" data-action="close" data-sheet="lessonSheet">✕</button></div>
+  <div class="sheet-body scroll" id="lessonBody"></div>
+  <div class="sheet-foot" id="lessonFoot"></div>
+ </div>
 </div>
 
 <div class="sheet" id="editSheet">
-  <div class="backdrop" data-action="close" data-sheet="editSheet"></div>
-  <div class="sheet-card">
-    <div class="sheet-head"><div class="gripbar"></div><h3 id="edTitle">Новый урок</h3><button class="icon-btn" data-action="close" data-sheet="editSheet">✕</button></div>
-    <div class="sheet-body scroll">
-      <div class="form-grid">
-        <label>Название<input class="input" id="edName" maxlength="80"></label>
-        <label>Модуль<select class="input" id="edModule"></select></label>
-        <label>Минуты<input class="input" id="edMinutes" type="number" min="3" max="20" value="6"></label>
-        <label>Краткое описание<input class="input" id="edSummary" maxlength="140"></label>
-        <label>Текст урока<textarea class="input" id="edText" placeholder="Абзацы разделяйте пустой строкой. Пункты списка начинайте с «- »."></textarea></label>
-        <div class="mini">Тест (необязательно)</div>
-        <label>Вопрос<input class="input" id="edQ" maxlength="160"></label>
-        <label>Вариант 1<input class="input" id="edA0"></label>
-        <label>Вариант 2<input class="input" id="edA1"></label>
-        <label>Вариант 3<input class="input" id="edA2"></label>
-        <label>Вариант 4<input class="input" id="edA3"></label>
-        <label>Правильный вариант<select class="input" id="edCorrect"><option value="0">1</option><option value="1">2</option><option value="2">3</option><option value="3">4</option></select></label>
-        <label>Объяснение<input class="input" id="edExplain"></label>
-        <div class="field-err" id="edErr" style="color:var(--red);font-size:12px;min-height:16px"></div>
-      </div>
-    </div>
-    <div class="sheet-foot"><button class="btn primary" data-action="ed-save">Сохранить урок</button></div>
+ <div class="backdrop" data-action="close" data-sheet="editSheet"></div>
+ <div class="sheet-card">
+  <div class="sheet-head"><div class="gripbar"></div><h3 id="edTitle">Новый урок</h3><button class="icon-btn" data-action="close" data-sheet="editSheet">✕</button></div>
+  <div class="sheet-body scroll">
+   <div class="form-grid">
+    <label>ID урока<input class="input" id="edId" placeholder="например fin-07"></label>
+    <label>Название<input class="input" id="edName" maxlength="90"></label>
+    <label>Модуль<select class="input" id="edModule"></select></label>
+    <label>Минуты<input class="input" id="edMinutes" type="number" min="3" max="20" value="6"></label>
+    <label>Краткое описание<input class="input" id="edSummary" maxlength="160"></label>
+    <label>Текст урока<textarea class="input" id="edText" placeholder="Абзацы разделяйте пустой строкой. Список начинайте с «- »."></textarea></label>
+    <div class="mini">Тест</div>
+    <label>Вопрос<input class="input" id="edQ"></label>
+    <label>Вариант 1<input class="input" id="edA0"></label>
+    <label>Вариант 2<input class="input" id="edA1"></label>
+    <label>Вариант 3<input class="input" id="edA2"></label>
+    <label>Вариант 4<input class="input" id="edA3"></label>
+    <label>Правильный вариант<select class="input" id="edCorrect"><option value="0">1</option><option value="1">2</option><option value="2">3</option><option value="3">4</option></select></label>
+    <label>Объяснение<input class="input" id="edExplain"></label>
+    <div class="err" id="edErr"></div>
+   </div>
   </div>
+  <div class="sheet-foot"><button class="btn primary" data-action="ed-save">Сохранить урок</button></div>
+ </div>
 </div>
 
 <div class="modal" id="confirm">
-  <div class="backdrop" data-action="cf-no"></div>
-  <div class="modal-card"><h3 id="cfTitle"></h3><p id="cfMsg"></p>
-    <div class="btn-row"><button class="btn ghost" data-action="cf-no">Отмена</button><button class="btn danger" data-action="cf-yes" id="cfYes">OK</button></div>
-  </div>
+ <div class="backdrop" data-action="cf-no"></div>
+ <div class="modal-card"><h3 id="cfTitle"></h3><p id="cfMsg"></p>
+  <div class="btn-row"><button class="btn ghost" data-action="cf-no">Отмена</button><button class="btn danger" data-action="cf-yes" id="cfYes">OK</button></div>
+ </div>
 </div>
 
 <div id="toast"><span id="toastIco">✅</span><span id="toastMsg"></span><button id="toastAction" data-action="toast-action">Отменить</button></div>
@@ -344,160 +297,77 @@ const today=()=>iso(new Date());
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const clone=o=>JSON.parse(JSON.stringify(o));
 const plural=(n,a,b,c)=>{n=Math.abs(n)%100;const d=n%10;if(n>10&&n<20)return c;if(d>1&&d<5)return b;if(d===1)return a;return c};
-const fmtTime=ms=>{ms=Math.max(0,ms);const s=Math.floor(ms/1000),h=Math.floor(s/3600),m=Math.floor(s%3600/60),ss=s%60;return `${pad(h)}:${pad(m)}:${pad(ss)}`};
+const fmtTime=ms=>{ms=Math.max(0,ms);const s=Math.floor(ms/1000);return `${pad(Math.floor(s/3600))}:${pad(Math.floor(s%3600/60))}:${pad(s%60)}`};
 const fmtClock=ts=>new Intl.DateTimeFormat('ru-RU',{hour:'2-digit',minute:'2-digit'}).format(new Date(ts));
+const fmtDate=ts=>new Intl.DateTimeFormat('ru-RU',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}).format(new Date(ts));
 const hexA=(h,a)=>{const n=parseInt(h.slice(1),16);return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`};
 
-const COURSE={
- title:'Финансы, инвестиции и трейдинг',
- modules:[
-  {id:'m-fin',title:'Финансовая грамотность',color:'#F5C451',icon:'🧭'},
-  {id:'m-inv',title:'Инвестиции',color:'#4DA6FF',icon:'📈'},
-  {id:'m-tr',title:'Трейдинг',color:'#F06BD3',icon:'⚡'}
- ],
- lessons:[
-  {id:'l-budget',module:'m-fin',title:'Бюджет, который работает',minutes:6,summary:'Как распределять доход и не зависеть от силы воли.',
-   blocks:[
-    {t:'p',text:'Бюджет — это не ограничение, а система распределения капитала. Самая частая ошибка: сначала тратить, а откладывать то, что осталось. Обычно не остаётся ничего. Работающий подход обратный: сначала заплати себе.'},
-    {t:'ul',items:['Определите обязательные расходы: жильё, еда, транспорт, связь.','Сразу после дохода переводите фиксированный процент на цели.','Оставьте отдельную сумму на радости — бюджет без удовольствий долго не живёт.','Автоматизируйте переводы, чтобы не принимать решение каждый месяц.']},
-    {t:'p',text:'Популярный ориентир — правило 50/30/20: 50% на нужды, 30% на желания, 20% на накопления и долги. Это не закон. Если жильё съедает 45%, пропорции придётся адаптировать.'},
-    {t:'tip',text:'Начните с 10% и повышайте на 1 процентный пункт раз в месяц. Важнее регулярность, чем идеальная пропорция.'}
-   ],
-   quiz:[{q:'Что лучше сделать сразу после получения дохода?',a:['Потратить на текущие желания','Сначала отложить заранее определённую сумму','Ждать конца месяца','Купить валюту на всё'],c:1,x:'Принцип «сначала заплати себе» убирает зависимость от силы воли и делает накопления системными.'}]},
-  {id:'l-cushion',module:'m-fin',title:'Подушка безопасности',minutes:5,summary:'Зачем нужен резерв и где его хранить.',
-   blocks:[
-    {t:'p',text:'Подушка безопасности — это деньги на случай потери дохода, болезни или срочного ремонта. Её задача — не заработать максимум, а быть доступной именно в тот момент, когда рынок акций может быть в просадке.'},
-    {t:'ul',items:['Ориентир: 3–6 месяцев ваших обязательных расходов.','Храните в ликвидных инструментах: накопительный счёт, короткий вклад, наличные.','Не держите подушку в акциях, криптовалюте или длинных облигациях.','Пополняйте её автоматически, пока не достигнете цели.']},
-    {t:'warn',text:'Инвестиции без подушки часто заканчиваются продажей активов в худший момент. Сначала защита, потом риск.'}
-   ],
-   quiz:[{q:'Где разумнее держать подушку безопасности?',a:['В одной акции','В криптовалюте','На ликвидном счёте или коротком вкладе','В длинных облигациях'],c:2,x:'Подушка должна быть стабильной и доступной. Волатильные активы для неё не подходят.'}]},
-  {id:'l-compound',module:'m-fin',title:'Сложный процент',minutes:7,summary:'Почему время важнее суммы и как работает правило 72.',
-   blocks:[
-    {t:'p',text:'Сложный процент — это когда доход начинает приносить новый доход. Сначала рост кажется медленным, но со временем кривая ускоряется. Именно поэтому ранний старт часто важнее большой суммы.'},
-    {t:'formula',text:'Будущая сумма = взнос × (1 + ставка)^годы'},
-    {t:'p',text:'Если откладывать по 10 000 ₽ в месяц под 10% годовых, через 10 лет получится около 2 млн ₽, через 20 лет — более 7 млн ₽. Разница создаётся не только взносами, но и временем.'},
-    {t:'tip',text:'Правило 72: разделите 72 на годовую ставку. Получите примерное число лет удвоения капитала. При 8% годовых капитал удваивается примерно за 9 лет.'}
-   ],
-   quiz:[{q:'По правилу 72, при ставке 9% годовых капитал удвоится примерно за…',a:['4 года','8 лет','12 лет','18 лет'],c:1,x:'72 ÷ 9 = 8. Это приближённая оценка, а не точная формула.'}]},
-  {id:'l-debt',module:'m-fin',title:'Долги: дорогие и дешёвые',minutes:6,summary:'Как сравнивать кредиты и что гасить первым.',
-   blocks:[
-    {t:'p',text:'Не все долги одинаковы. Важно смотреть не на рекламную ставку, а на полную стоимость кредита: комиссии, страховки, навязанные услуги. Дорогой долгdestroyит доходность быстрее, чем любые инвестиции могут его создать.'},
-    {t:'ul',items:['Сначала гасите самые дорогие долги: микрозаймы, кредитные карты вне грейса, потребительские кредиты.','Метод лавины: гасить долг с максимальной ставкой — математически выгоднее.','Метод снежного кома: гасить самый маленький долг — психологически проще.','Не инвестируйте в рискованные активы в долг.']},
-    {t:'warn',text:'Если кредитка под 35% годовых, а инвестиции ожидаемо дают 10–15%, сначала избавьтесь от долга. Это гарантированная «доходность».'}
-   ],
-   quiz:[{q:'Какой долг обычно выгоднее гасить первым?',a:['Самый старый','Самый маленький','С самой высокой полной стоимостью','Любой, лишь бы платёж был удобным'],c:2,x:'Метод лавины экономит больше всего денег, потому что убирает самый дорогой долг.'}]},
-  {id:'l-assets',module:'m-inv',title:'Акции, облигации, фонды',minutes:8,summary:'Базовые инструменты инвестора и чем они отличаются.',
-   blocks:[
-    {t:'p',text:'Акция — доля в бизнесе. Вы можете зарабатывать на росте цены и дивидендах, но цена может сильно падать. Облигация — займ эмитенту. Обычно она даёт купоны и номинал в конце срока, но несёт риск дефолта и изменения цены при росте ставок.'},
-    {t:'ul',items:['Акции: потенциал роста выше, волатильность выше.','Облигации: предсказуемее, но есть кредитный и процентный риск.','Фонды (ETF/БПИФ): корзина бумаг, мгновенная диверсификация.','Денежный рынок: краткосрочные инструменты, близкие к ставкам центрального банка.']},
-    {t:'tip',text:'Новичку часто проще начать с широких индексных фондов, чем выбирать отдельные акции. Но фонд тоже падает вместе с рынком.'}
-   ],
-   quiz:[{q:'Что такое облигация?',a:['Доля в компании','Займ эмитенту','Страховой полис','Валютная пара'],c:1,x:'Покупая облигацию, вы даёте деньги в долг государству или компании.'}]},
-  {id:'l-risk',module:'m-inv',title:'Риск и диверсификация',minutes:7,summary:'Почему нельзя класть всё в одну идею.',
-   blocks:[
-    {t:'p',text:'Риск — это не только шанс потерять деньги, но и неопределённость результата. Диверсификация снижает риск отдельной ошибки: если одна компания разочарует, портфель не обязательно рухнет.'},
-    {t:'ul',items:['Распределяйте деньги между классами активов: акции, облигации, денежный рынок.','Внутри акций — между странами, секторами и валютами.','Не путайте количество позиций с диверсификацией: 20 банков — это всё равно ставка на один сектор.','Ребалансировка возвращает портфель к целевым долям.']},
-    {t:'warn',text:'Диверсификация не убирает рыночный риск. В кризис большинство рисковых активов может падать одновременно.'}
-   ],
-   quiz:[{q:'Что даёт настоящая диверсификация?',a:['Больше одинаковых акций','Снижение риска отдельной ошибки','Гарантию прибыли','Отсутствие просадок'],c:1,x:'Диверсификация уменьшает влияние одной неудачи, но не гарантирует прибыль.'}]},
-  {id:'l-horizon',module:'m-inv',title:'Цель, горизонт, ребалансировка',minutes:6,summary:'Как срок цели меняет допустимый риск.',
-   blocks:[
-    {t:'p',text:'Деньги на отпуск через год и деньги на пенсию через 25 лет не должны инвестироваться одинаково. Чем короче горизонт, тем меньше допустима просадка перед моментом, когда деньги понадобятся.'},
-    {t:'ul',items:['Короткие цели: акцент на сохранность и ликвидность.','Средние цели: смесь облигаций и акций.','Длинные цели: больше акций, если вы выдерживаете колебания.','Раз в год проверяйте доли активов и делайте ребалансировку.']},
-    {t:'tip',text:'Запишите цель в формате: сумма, срок, валюта, допустимая просадка. Это превращает мечту в инвестиционный план.'}
-   ],
-   quiz:[{q:'Деньги на первый взнос через 9 месяцев лучше…',a:['Вложить в одну волатильную акцию','Держать в консервативных ликвидных инструментах','Отправить в криптовалюту','Одолжить другу под процент'],c:1,x:'Короткий горизонт не оставляет времени переждать просадку.'}]},
-  {id:'l-costs',module:'m-inv',title:'Комиссии, налоги, инфляция',minutes:6,summary:'Что съедает доходность незаметно.',
-   blocks:[
-    {t:'p',text:'Доходность бывает грязной и чистой. Комиссии фонда, брокера, спред при покупке и налоги уменьшают результат. Инфляция снижает покупательную способность. Реальная доходность = номинальная доходность минус инфляция.'},
-    {t:'ul',items:['Сравнивайте полные комиссии фондов, а не только прошлую доходность.','Учитывайте спред: разницу между ценой покупки и продажи.','Изучите налоговые льготы вашей страны и правила их применения.','Не забывайте про инфляцию: 12% при инфляции 8% — это около 4% реального роста.']},
-    {t:'warn',text:'Налоговые правила меняются. Перед решениями проверяйте актуальные условия у брокера и в официальных источниках.'}
-   ],
-   quiz:[{q:'Если доходность 13%, а инфляция 9%, реальная доходность примерно…',a:['22%','13%','4%','0%'],c:2,x:'Приближённо: 13% − 9% = 4%. Точная формула учитывает деление на индекс инфляции.'}]},
-  {id:'l-trading',module:'m-tr',title:'Трейдинг ≠ инвестирование',minutes:5,summary:'Чем спекулятивная торговля отличается от долгосрочного подхода.',
-   blocks:[
-    {t:'p',text:'Инвестирование обычно опирается на рост бизнеса и экономики на горизонте лет. Трейдинг пытается заработать на колебаниях цены на горизонте минут, дней или недель. Это другая деятельность с другими рисками и навыками.'},
-    {t:'ul',items:['Трейдинг требует дисциплины, статистики и контроля риска.','Большинство активных трейдеров не обыгрывают рынок после комиссий.','Нельзя оценивать стратегию по одной удачной сделке.','Начинать лучше с теории и симулятора, а не с реальных денег.']},
-    {t:'warn',text:'Трейдинг с плечом может быстро уничтожить депозит. Не торгуйте деньгами, потеря которых ухудшит вашу жизнь.'}
-   ],
-   quiz:[{q:'Главное отличие трейдинга от инвестирования?',a:['Трейдинг всегда прибыльнее','Трейдинг работает на коротких горизонтах и требует контроля риска','Инвестирование не несёт риска','Трейдинг не требует знаний'],c:1,x:'Трейдинг — это спекулятивная работа с ценой, обычно на более коротких горизонтах.'}]},
-  {id:'l-candles',module:'m-tr',title:'Японские свечи',minutes:8,summary:'Как читать开盘, закрытие, максимум и минимум.',
-   blocks:[
-    {t:'p',text:'Свеча показывает четыре цены за период:开盘 — цена открытия, close — цена закрытия, high — максимум, low — минимум. Тело свечи — диапазон между открытием и закрытием. Тени — экстремумы периода.'},
-    {t:'candles'},
-    {t:'ul',items:['Если закрытие выше открытия — свеча бычья, часто зелёная.','Если закрытие ниже открытия — медвежья, часто красная.','Длинная верхняя тень: цену выталкивали вниз после попытки роста.','Таймфрейм задаёт масштаб: одна свеча может равняться минуте, дню или неделе.']},
-    {t:'tip',text:'Свеча — это не предсказание, а сжатая история борьбы покупателей и продавцов. Контекст важнее одной фигуры.'}
-   ],
-   quiz:[{q:'Что показывает верхняя тень свечи?',a:['Цену открытия','Максимум периода выше тела','Объём торгов','Дивиденды'],c:1,x:'Тень показывает экстремум цены, до которого рынок дошёл, но не удержался.'}]},
-  {id:'l-riskmgmt',module:'m-tr',title:'Риск на сделку и стоп-лосс',minutes:9,summary:'Правило 1%, размер позиции и отношение риск/прибыль.',
-   blocks:[
-    {t:'p',text:'Профессиональный подход начинается не с точки входа, а с риска. Стоп-лосс — заранее определённый уровень, где идея признаётся неверной. Риск на сделку — сумма, которую вы готовы потерять при срабатывании стопа.'},
-    {t:'formula',text:'Размер позиции = риск в деньгах ÷ расстояние до стопа'},
-    {t:'p',text:'Если депозит 100 000 ₽, риск 1% = 1 000 ₽. Вход 50 ₽, стоп 48 ₽, риск на акцию 2 ₽. Размер позиции: 1 000 ÷ 2 = 500 акций. Не наоборот: сначала купить, потом думать, где выходить.'},
-    {t:'ul',items:['Риск на сделку часто ограничивают 0,5–1% депозита.','Отношение прибыль/риск ниже 2 часто требует очень высокой точности.','Плечо увеличивает и прибыль, и убыток.','Серия убыточных сделок нормальна — риск должен позволять её пережить.']},
-    {t:'warn',text:'Стоп не гарантирует цену исполнения в условиях гэпа или низкой ликвидности. Риск может быть больше расчётного.'}
-   ],
-   quiz:[{q:'Депозит 200 000 ₽, риск 1%, вход 100 ₽, стоп 95 ₽. Сколько акций можно купить?',a:['200','400','800','2000'],c:1,x:'Риск = 2 000 ₽. Риск на акцию = 5 ₽. 2 000 ÷ 5 = 400 акций.'}]},
-  {id:'l-psych',module:'m-tr',title:'Психология и журнал сделок',minutes:7,summary:'FOMO, тильт и почему журнал важнее прогнозов.',
-   blocks:[
-    {t:'p',text:'Главные враги трейдера — не рынок, а импульсивность. FOMO заставляет входить после движения, страх фиксации прибыли заставляет выходить слишком рано, а желание отыграться превращает одну ошибку в серию.'},
-    {t:'ul',items:['Перед входом запишите: причина входа, стоп, цель, риск, сценарий отмены.','После сделки зафиксируйте результат и эмоцию.','Раз в неделю смотрите статистику: точность, средний риск/прибыль, ошибки.','После серии убытков делайте паузу — это правило, а не слабость.']},
-    {t:'tip',text:'Журнал сделок превращает хаос в данные. Без данных вы не улучшаете стратегию, а просто надеетесь.'}
-   ],
-   quiz:[{q:'Что такое FOMO?',a:['Страх упустить движение','Налог на сделку','Вид стоп-лосса','Метод расчёта позиции'],c:0,x:'FOMO — fear of missing out. Страх упустить возможность, который часто ведёт к импульсивным входам.'}]}
- ]
-};
+const FALLBACK={title:'Компаунд · стартовый набор',modules:[
+{id:'m-fin',title:'Финансовая база',color:'#F5C451',icon:'🧭'},
+{id:'m-inv',title:'Инвестиции',color:'#4DA6FF',icon:'📈'},
+{id:'m-trd',title:'Трейдинг',color:'#FF9A3D',icon:'⚡'}],
+lessons:[
+{id:'fin-01',module:'m-fin',title:'Бюджет и денежный поток',minutes:6,summary:'Как видеть, куда уходят деньги.',blocks:[{t:'p',text:'Бюджет — это карта денежного потока: сколько пришло, сколько ушло и что осталось для целей. Без учёта даже высокий доход не создаёт капитал.'},{t:'ul',items:['Записывайте доходы и обязательные расходы.','Сначала откладывайте, потом тратьте остаток.','Автоматизируйте переводы на цели.']},{t:'tip',text:'Начните с 10% дохода и повышайте долю постепенно.'}],quiz:[{q:'Что надёжнее для накоплений?',a:['Откладывать то, что осталось','Сначала переводить фиксированную сумму','Ждать конца года','Тратить всё и начать заново'],c:1,x:'Принцип «сначала заплати себе» делает накопления системными.'}]},
+{id:'fin-02',module:'m-fin',title:'Подушка безопасности',minutes:5,summary:'Резерв, который защищает инвестиции.',blocks:[{t:'p',text:'Подушка — деньги на случай потери дохода или срочных расходов. Её задача — быть доступной, а не зарабатывать максимум.'},{t:'ul',items:['Ориентир: 3–6 месяцев обязательных расходов.','Храните в ликвидных инструментах.','Не держите резерв в волатильных активах.']},{t:'warn',text:'Инвестиции без подушки часто заканчиваются продажей активов в просадке.'}],quiz:[{q:'Где разумно держать подушку?',a:['В одной акции','В криптовалюте','На накопительном счёте','В длинных облигациях'],c:2,x:'Резерв должен быть стабильным и доступным.'}]},
+{id:'inv-01',module:'m-inv',title:'Акция и облигация',minutes:7,summary:'Два базовых инструмента инвестора.',blocks:[{t:'p',text:'Акция — доля в бизнесе. Облигация — займ эмитенту. У акции выше потенциал роста и колебания цены, у облигации обычно предсказуемее выплаты, но есть риск дефолта.'},{t:'ul',items:['Акция: рост цены и дивиденды.','Облигация: купоны и возврат номинала.','Фонд: корзина бумаг вместо одной идеи.']},{t:'tip',text:'Новичку проще начать с широких фондов, чем с выбора отдельных акций.'}],quiz:[{q:'Что такое облигация?',a:['Доля в компании','Займ эмитенту','Страховой полис','Валютная пара'],c:1,x:'Покупая облигацию, вы даёте деньги в долг.'}]},
+{id:'trd-01',module:'m-trd',title:'Трейдинг и инвестирование',minutes:5,summary:'Разные горизонты и разные риски.',blocks:[{t:'p',text:'Инвестирование опирается на рост бизнеса на горизонте лет. Трейдинг работает с колебаниями цены на коротких горизонтах и требует системы, статистики и контроля риска.'},{t:'ul',items:['Трейдинг требует правил входа и выхода.','Одна удачная сделка ничего не доказывает.','Начинать лучше с теории и симулятора.']},{t:'warn',text:'Торговля с плечом способна быстро уничтожить депозит.'}],quiz:[{q:'Главное отличие трейдинга?',a:['Он всегда прибыльнее','Короткий горизонт и активный контроль риска','Отсутствие риска','Не требует знаний'],c:1,x:'Трейдинг — спекулятивная работа с ценой на коротких горизонтах.'}]},
+{id:'rsk-01',module:'m-trd',title:'Риск на сделку',minutes:8,summary:'Сколько можно потерять в одной идее.',blocks:[{t:'p',text:'Риск на сделку — сумма, которую вы теряете при срабатывании стопа. Сначала считается риск, потом размер позиции, и только затем принимается решение о входе.'},{t:'formula',text:'Размер позиции = риск в деньгах ÷ расстояние до стопа'},{t:'ul',items:['Часто используют 0,5–1% депозита на сделку.','Стоп ставится по стратегии, а не по желанию.','Плечо увеличивает и прибыль, и убыток.']},{t:'warn',text:'При гэпе фактический убыток может оказаться больше расчётного.'}],quiz:[{q:'Депозит 100 000 ₽, риск 1%, вход 50 ₽, стоп 48 ₽. Размер позиции?',a:['100 акций','500 акций','1000 акций','2500 акций'],c:1,x:'Риск 1000 ₽ ÷ 2 ₽ на акцию = 500 акций.'}]},
+{id:'psy-01',module:'m-trd',title:'FOMO и импульсивность',minutes:6,summary:'Почему мы входим слишком поздно.',blocks:[{t:'p',text:'FOMO — страх упустить движение. Он заставляет покупать после сильного роста, когда риск уже высок, а потенциал ادامه снижен.'},{t:'ul',items:['Решение принимается до движения, а не в моменте.','Пропущенная сделка — не убыток.','Чек-лист снижает число импульсивных входов.']},{t:'tip',text:'Запишите правило: «не вхожу без заранее отмеченного уровня и стопа».'}],quiz:[{q:'Что такое FOMO?',a:['Страх упустить движение','Налог на сделку','Вид стопа','Метод расчёта позиции'],c:0,x:'FOMO — fear of missing out, страх упустить возможность.'}]}
+]};
 
-const KEY='compound.v1';
-let S=null,tab='home',session=null,detailId=null,editId=null,bulk=false,sel=new Set(),undo=null,cfResolve=null,toastTimer=null,dueFlag=false,audioCtx=null,confettiRAF=null;
+const KEY='compound.v3';
+let S=null,tab='home',baseSeg='sync',session=null,detailId=null,editId=null,bulk=false,sel=new Set(),undo=null,cfResolve=null,toastTimer=null,dueFlag=false,audioCtx=null,confettiRAF=null,syncing=false,viewRow=false;
 
-function defaultSettings(){return{sound:true,schedule:{interval:3,start:9,end:21,length:7},inApp:true}}
+function defSettings(){return{sound:true,autoSync:true,schedule:{interval:3,start:9,end:21,length:7}}}
 function seed(){
- const t=new Date(),act={};
- const addAct=(off,min,xp)=>{const d=new Date(t);d.setDate(d.getDate()-off);act[iso(d)]={minutes:min,xp,sessions:1}};
- addAct(2,12,90);addAct(1,8,80);addAct(0,6,60);
- const prog={'l-budget':{done:true,score:1,at:iso(new Date(t.getFullYear(),t.getMonth(),t.getDate()-2)),attempts:1},'l-cushion':{done:true,score:1,at:iso(new Date(t.getFullYear(),t.getMonth(),t.getDate()-1)),attempts:1}};
- return {courseTitle:COURSE.title,modules:clone(COURSE.modules),lessons:clone(COURSE.lessons),order:COURSE.lessons.map(l=>l.id),
-  progress:prog,activity:act,xp:230,nextDue:Date.now()+2*3600000+14*60000,settings:defaultSettings(),
-  ui:{tab:'home',filters:{q:'',module:'all',status:'all',sort:'manual'},sound:true},version:1};
+ const fb=clone(FALLBACK);
+ return{v:3,courseTitle:fb.title,modules:fb.modules,lessons:fb.lessons.map(l=>({...l,source:'db'})),order:fb.lessons.map(l=>l.id),
+ progress:{},activity:{},xp:0,nextDue:Date.now()+2*3600000+14*60000,settings:defSettings(),
+ ui:{tab:'home',baseSeg:'sync',filters:{q:'',module:'all',status:'all',source:'all',sort:'manual'},views:[]},
+ sync:{url:'lessons.json',last:0,status:'idle',msg:'База ещё не проверялась',added:0,updated:0}}
 }
-function load(){try{const raw=localStorage.getItem(KEY);if(raw){S=JSON.parse(raw);S.settings={...defaultSettings(),...S.settings};S.ui=S.ui||seed().ui;tab=S.ui.tab||'home'}else{S=seed();save()}}catch(e){S=seed()}}
+function load(){
+ try{const raw=localStorage.getItem(KEY);
+  if(raw){S=JSON.parse(raw);S.settings={...defSettings(),...S.settings};S.ui={...seed().ui,...S.ui};S.sync={...seed().sync,...S.sync};tab=S.ui.tab||'home';baseSeg=S.ui.baseSeg||'sync'}
+  else{S=seed();save()}
+ }catch(e){S=seed()}
+}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast('Не удалось сохранить данные','⚠️')}}
-function saveUI(){S.ui.tab=tab;save()}
+function saveUI(){S.ui.tab=tab;S.ui.baseSeg=baseSeg;save()}
 function mod(id){return S.modules.find(m=>m.id===id)||S.modules[0]||{title:'Модуль',color:'#4DA6FF',icon:'📘'}}
 function lesson(id){return S.lessons.find(l=>l.id===id)}
-function ordered(){return S.order.map(lesson).filter(Boolean).concat(S.lessons.filter(l=>!S.order.includes(l.id)))}
-function nextLesson(){const target=S.settings.schedule.length+3;const list=ordered().filter(l=>!S.progress[l.id]?.done);return list.find(l=>l.minutes<=target)||list[0]||ordered()[0]}
+function ordered(){const map=new Map(S.lessons.map(l=>[l.id,l]));const out=S.order.map(id=>map.get(id)).filter(Boolean);S.lessons.forEach(l=>{if(!S.order.includes(l.id))out.push(l)});return out}
+function nextLesson(){const t=S.settings.schedule.length+3;const list=ordered().filter(l=>!S.progress[l.id]?.done);return list.find(l=>l.minutes<=t)||list[0]||ordered()[0]}
 function streak(){let n=0,d=new Date();if(!S.activity[today()]?.sessions)d.setDate(d.getDate()-1);while(S.activity[iso(d)]?.sessions){n++;d.setDate(d.getDate()-1)}return n}
-function accuracy(){const p=Object.values(S.progress).filter(x=>x.done&&typeof x.score==='number');if(!p.length)return 0;return p.reduce((s,x)=>s+x.score,0)/p.length}
+function accuracy(){const p=Object.values(S.progress).filter(x=>x.done&&typeof x.score==='number');return p.length?p.reduce((s,x)=>s+x.score,0)/p.length:0}
 function totalMinutes(){return Object.values(S.activity).reduce((s,a)=>s+(a.minutes||0),0)}
+function doneCount(){return S.lessons.filter(l=>S.progress[l.id]?.done).length}
 function computeNextDue(from){const sc=S.settings.schedule;let d=new Date(from+sc.interval*3600000);if(d.getHours()<sc.start)d.setHours(sc.start,0,0,0);else if(d.getHours()>sc.end||(d.getHours()===sc.end&&d.getMinutes()>0)){d.setDate(d.getDate()+1);d.setHours(sc.start,0,0,0)}return d.getTime()}
 function pushUndo(){undo=clone(S)}
-function doUndo(){if(!undo)return;S=undo;undo=null;save();renderAll();toast('Действие отменено','↩️')}
+function doUndo(){if(!undo)return;const u=undo;undo=null;S=u;tab=S.ui?.tab||tab;baseSeg=S.ui?.baseSeg||baseSeg;save();renderAll();toast('Действие отменено','↩️')}
 
-function toast(msg,ico='✅',action){$('toastMsg').textContent=msg;$('toastIco').textContent=ico;const b=$('toastAction');if(action){b.style.display='block';b.textContent=action.label;b._fn=action.fn}else{b.style.display='none';b._fn=null}$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),action?6500:3000)}
+function toast(msg,ico='✅',action){$('toastMsg').textContent=msg;$('toastIco').textContent=ico;const b=$('toastAction');if(action){b.style.display='block';b.textContent=action.label;b._fn=action.fn}else{b.style.display='none';b._fn=null}$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),action?6500:3200)}
 function confirmBox(title,msg,ok='OK'){ $('cfTitle').textContent=title;$('cfMsg').textContent=msg;$('cfYes').textContent=ok;$('confirm').classList.add('open');return new Promise(r=>cfResolve=r)}
 function resolveConfirm(v){$('confirm').classList.remove('open');if(cfResolve){cfResolve(v);cfResolve=null}}
 
 function sound(type){
  if(!S.settings.sound)return;
- try{
-  if(!audioCtx)audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+ try{if(!audioCtx)audioCtx=new (window.AudioContext||window.webkitAudioContext)();
   const ctx=audioCtx,t=ctx.currentTime;
   const play=(f,d,off=0,g=.035,w='sine')=>{const o=ctx.createOscillator(),v=ctx.createGain();o.type=w;o.frequency.value=f;v.gain.setValueAtTime(0,t+off);v.gain.linearRampToValueAtTime(g,t+off+.01);v.gain.exponentialRampToValueAtTime(.0001,t+off+d);o.connect(v).connect(ctx.destination);o.start(t+off);o.stop(t+off+d+.02)};
   if(type==='ok'){play(660,.12);play(880,.16,.09)}
-  if(type==='no'){play(180,.2,0,.04,'triangle')}
-  if(type==='win'){[523,659,784,1046].forEach((f,i)=>play(f,.22,i*.09,.04))}
+  if(type==='no')play(180,.2,0,.04,'triangle');
+  if(type==='win')[523,659,784,1046].forEach((f,i)=>play(f,.22,i*.09,.04));
   if(type==='tap')play(420,.05,0,.015,'triangle');
+  if(type==='sync'){play(520,.1);play(780,.14,.08)}
  }catch(e){}
 }
-function toggleSound(){S.settings.sound=!S.settings.sound;save();renderSound();toast(S.settings.sound?'Звук включён':'Звук выключен',S.settings.sound?'🔊':'🔇');if(S.settings.sound)sound('tap')}
-function renderSound(){$('soundBtn').textContent=S.settings.sound?'🔊':'🔇'}
+function renderSound(){$('soundBtn').textContent=S.settings.sound?'🔊':''}
 
 function confetti(){
  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
  const c=$('confetti'),x=c.getContext('2d');c.width=innerWidth*devicePixelRatio;c.height=innerHeight*devicePixelRatio;x.scale(devicePixelRatio,devicePixelRatio);
- const colors=['#2EE59D','#F5C451','#4DA6FF','#F06BD3','#35D0C0','#FF5C6C'];
+ const colors=['#2EE59D','#F5C451','#4DA6FF','#F06BD3','#35D0C0','#FF5C6C','#A98BFF','#FF9A3D'];
  const p=Array.from({length:90},()=>({x:innerWidth/2,y:innerHeight*.35,vx:(Math.random()-.5)*9,vy:-Math.random()*9-3,g:.22,r:Math.random()*5+3,c:colors[Math.floor(Math.random()*colors.length)],a:1,rot:Math.random()*6}));
  let t=0;cancelAnimationFrame(confettiRAF);
  (function loop(){t++;x.clearRect(0,0,innerWidth,innerHeight);let live=false;
@@ -505,54 +375,99 @@ function confetti(){
   if(live&&t<240)confettiRAF=requestAnimationFrame(loop);else x.clearRect(0,0,innerWidth,innerHeight)})();
 }
 
+/* ---------- санитайзер и слияние базы ---------- */
+function parseText(text){const parts=String(text||'').split(/\n\s*\n/).map(s=>s.trim()).filter(Boolean),out=[];for(const p of parts){const lines=p.split('\n').map(s=>s.trim()).filter(Boolean);if(lines.length&&lines.every(l=>l.startsWith('- ')))out.push({t:'ul',items:lines.map(l=>l.slice(2))});else out.push({t:'p',text:lines.join(' ')})}return out}
+function sanitizeCourse(d){
+ if(!d||!Array.isArray(d.modules)||!Array.isArray(d.lessons))throw new Error('Нужны массивы modules и lessons');
+ const modules=d.modules.filter(m=>m&&m.id&&m.title).map(m=>({id:String(m.id).slice(0,40),title:String(m.title).slice(0,60),color:/^#[0-9a-f]{6}$/i.test(m.color)?m.color:'#4DA6FF',icon:String(m.icon||'📘').slice(0,4)}));
+ if(!modules.length)throw new Error('Нет модулей');
+ const seen=new Set();
+ const lessons=d.lessons.filter(l=>l&&l.id&&l.title).map((l,i)=>{
+  let id=String(l.id).slice(0,60);if(seen.has(id))id=id+'-'+i;seen.add(id);
+  const blocks=Array.isArray(l.blocks)?l.blocks.filter(b=>b&&['p','ul','tip','warn','formula','candles'].includes(b.t)).map(b=>b.t==='ul'?{t:'ul',items:(Array.isArray(b.items)?b.items:[]).map(x=>String(x).slice(0,200)).filter(Boolean).slice(0,12)}:b.t==='candles'?{t:'candles'}:{t:b.t,text:String(b.text||'').slice(0,1500)}).filter(b=>b.t==='ul'?b.items.length:b.t==='candles'?true:b.text):parseText(l.text);
+  const quiz=Array.isArray(l.quiz)?l.quiz.filter(q=>q&&q.q&&Array.isArray(q.a)&&q.a.length>=2).map(q=>{const a=q.a.map(x=>String(x).slice(0,160)).slice(0,6);return{q:String(q.q).slice(0,240),a,c:clamp(Math.round(+q.c||0),0,a.length-1),x:String(q.x||'').slice(0,500)}}).slice(0,4):[];
+  return{id,module:modules.some(m=>m.id===l.module)?String(l.module):modules[0].id,title:String(l.title).slice(0,100),minutes:clamp(Math.round(+l.minutes||6),3,25),summary:String(l.summary||l.title).slice(0,180),blocks:blocks.length?blocks:[{t:'p',text:'Материал урока.'}],quiz};
+ });
+ if(!lessons.length)throw new Error('Нет уроков');
+ return{title:String(d.title||'Курс').slice(0,90),modules,lessons};
+}
+function mergeCourse(c,source='db'){
+ let added=0,updated=0,skipped=0;
+ c.modules.forEach(m=>{const i=S.modules.findIndex(x=>x.id===m.id);if(i<0)S.modules.push(m);else S.modules[i]={...S.modules[i],...m}});
+ S.courseTitle=c.title||S.courseTitle;
+ c.lessons.forEach(l=>{
+  const i=S.lessons.findIndex(x=>x.id===l.id);
+  if(i<0){S.lessons.push({...l,source});S.order.push(l.id);added++}
+  else if(S.lessons[i].local){skipped++}
+  else{S.lessons[i]={...S.lessons[i],...l,source};updated++}
+ });
+ return{added,updated,skipped};
+}
+async function syncDB(manual){
+ if(syncing)return;syncing=true;
+ S.sync.status='load';S.sync.msg='Проверяем базу…';renderBase();$('syncTop').classList.add('spin');
+ try{
+  const base=S.sync.url||'lessons.json';
+  const url=base+(base.includes('?')?'&':'?')+'v='+Date.now();
+  const res=await fetch(url,{cache:'no-store'});
+  if(!res.ok)throw new Error('HTTP '+res.status);
+  const data=await res.json();
+  const c=sanitizeCourse(data);
+  const r=mergeCourse(c,'db');
+  S.sync.last=Date.now();S.sync.status='ok';S.sync.added=r.added;S.sync.updated=r.updated;
+  S.sync.msg=`+${r.added} новых · ${r.updated} обновлено${r.skipped?` · ${r.skipped} локальных сохранено`:''}`;
+  save();renderAll();sound('sync');
+  if(manual||r.added)toast(r.added?`Добавлено уроков: ${r.added}`:'База актуальна','🔄');
+ }catch(e){
+  S.sync.status='err';S.sync.msg='Не удалось загрузить: '+e.message;
+  if(!S.lessons.length){const r=mergeCourse(sanitizeCourse(FALLBACK),'db');S.sync.msg='Работаем на встроенном наборе'}
+  save();renderAll();if(manual)toast('База не загрузилась. Проверьте lessons.json','⚠️');
+ }finally{syncing=false;$('syncTop').classList.remove('spin')}
+}
+
+/* ---------- контент ---------- */
 function blockHTML(b){
  if(b.t==='p')return `<p>${esc(b.text)}</p>`;
  if(b.t==='ul')return `<ul>${b.items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul>`;
  if(b.t==='tip')return `<div class="note">💡 ${esc(b.text)}</div>`;
  if(b.t==='warn')return `<div class="note warn">⚠️ ${esc(b.text)}</div>`;
  if(b.t==='formula')return `<div class="formula">${esc(b.text)}</div>`;
- if(b.t==='candles')return `<div class="candle-demo"><div class="cd up"><div class="wick"></div><div class="body"></div></div><div class="cd down"><div class="wick"></div><div class="body"></div></div><div class="cd up"><div class="wick" style="height:70px;top:10px"></div><div class="body" style="top:35px;height:20px"></div></div></div>`;
+ if(b.t==='candles')return `<div class="formula">Свеча: open → close, тени = high / low</div>`;
  return '';
 }
-function lessonMeta(l){const m=mod(l.module),p=S.progress[l.id];return `${m.icon} ${esc(m.title)} · ${l.minutes} мин · ${p?.done?'пройден':'новый'}`}
 
+/* ---------- рендеры ---------- */
 function renderTicker(){
- const done=Object.values(S.progress).filter(p=>p.done).length,acc=Math.round(accuracy()*100),st=streak();
- const html=`<span>XP <b>${S.xp}</b> ▲</span><span class="gold">STREAK <b>${st}D</b> 🔥</span><span>DUE <b data-due>${fmtTime(S.nextDue-Date.now())}</b></span><span>КУРС <b>${done}/${S.lessons.length}</b></span><span class="${acc>=70?'':'red'}">ТОЧНОСТЬ <b>${acc}%</b></span><span class="gold">МИНУТ <b>${totalMinutes()}</b></span>`;
+ const html=`<span>XP <b>${S.xp}</b> ▲</span><span class="gold">STREAK <b>${streak()}D</b> 🔥</span><span>DUE <b data-due>${fmtTime(S.nextDue-Date.now())}</b></span><span class="blue">БАЗА <b>${S.lessons.length}</b></span><span>ПРОЙДЕНО <b>${doneCount()}/${S.lessons.length}</b></span><span>ТОЧНОСТЬ <b>${Math.round(accuracy()*100)}%</b></span>`;
  $('ticker').innerHTML=html+html;
 }
 function renderTabs(){
- const items=[['home','Сегодня','◉'],['library','Уроки','≡'],['progress','Прогресс','◔'],['settings','Ещё','⚙']];
+ const items=[['home','Сегодня','◉'],['library','Уроки','≡'],['progress','Прогресс','◔'],['base','База','⛁']];
  $('tabbar').innerHTML=items.slice(0,2).map(([id,l,i])=>`<button class="tab ${tab===id?'on':''}" data-action="tab" data-tab="${id}"><span style="font-size:19px">${i}</span><span>${l}</span><span class="dot"></span></button>`).join('')+
- `<div class="fab-slot"><button class="fab" data-action="start" aria-label="Начать">▶</button></div>`+
+ `<div class="fab-slot"><button class="fab" data-action="start">▶</button></div>`+
  items.slice(2).map(([id,l,i])=>`<button class="tab ${tab===id?'on':''}" data-action="tab" data-tab="${id}"><span style="font-size:19px">${i}</span><span>${l}</span><span class="dot"></span></button>`).join('');
 }
 function renderHome(){
- const l=nextLesson(),m=mod(l.module),rem=S.nextDue-Date.now(),done=Object.values(S.progress).filter(p=>p.done).length;
- const queue=ordered().filter(x=>!S.progress[x.id]?.done).slice(0,3);
- const due=rem<=0;
+ const l=nextLesson();
+ if(!l){$('p-home').innerHTML=`<div class="empty"><span class="e">⛁</span><b>База пуста</b><p>Проверьте подключение к lessons.json</p><button class="btn primary" data-action="sync">Проверить базу</button></div>`;return}
+ const m=mod(l.module),rem=S.nextDue-Date.now(),due=rem<=0,queue=ordered().filter(x=>!S.progress[x.id]?.done).slice(0,3);
  $('p-home').innerHTML=`
- <div class="card hero">
-  <div class="hero-top">
-   <div><div class="lbl">${due?'Сессия готова':'Следующая сессия'}</div>
-    <div class="countdown ${due?'due':''}" data-countdown>${due?'Пора!':fmtTime(rem)}</div>
-    <div class="next-title">${esc(l.title)}</div>
-    <div class="next-meta">${m.icon} ${esc(m.title)} · ${l.minutes} мин · ${S.settings.schedule.length} мин цель</div>
-   </div>
-   <div class="ring"><svg viewBox="0 0 80 80"><circle class="tr" cx="40" cy="40" r="32"></circle><circle class="pr" id="dueRing" cx="40" cy="40" r="32" stroke-dasharray="201" stroke-dashoffset="0"></circle></svg><b>${due?'GO':'ждём'}</b></div>
-  </div>
+ <div class="card hero"><div class="hero-top"><div>
+  <div class="lbl">${due?'Сессия готова':'Следующая сессия'}</div>
+  <div class="countdown ${due?'due':''}" data-countdown>${due?'Пора!':fmtTime(rem)}</div>
+  <div class="next-title">${esc(l.title)}</div>
+  <div class="next-meta">${m.icon} ${esc(m.title)} · ${l.minutes} мин</div></div>
+  <div class="ring"><svg viewBox="0 0 80 80"><circle class="tr" cx="40" cy="40" r="32"/><circle class="pr" id="dueRing" cx="40" cy="40" r="32" stroke-dasharray="201" stroke-dashoffset="0"/></svg><b>${due?'GO':'ждём'}</b></div></div>
   <button class="btn ${due?'gold':'primary'}" style="margin-top:16px" data-action="start">${due?'🔔 Начать сейчас':'▶ Начать раньше'}</button>
-  <div class="stats">
-   <div class="stat"><i>Серия</i><b>${streak()} 🔥</b><small>${plural(streak(),'день','дня','дней')}</small></div>
-   <div class="stat"><i>Опыт</i><b>${S.xp}</b><small>XP</small></div>
-   <div class="stat"><i>Курс</i><b>${done}/${S.lessons.length}</b><small>уроков</small></div>
-  </div>
+  <div class="stats"><div class="stat"><i>Серия</i><b>${streak()} 🔥</b><small>${plural(streak(),'день','дня','дней')}</small></div><div class="stat"><i>Опыт</i><b>${S.xp}</b><small>XP</small></div><div class="stat"><i>Курс</i><b>${doneCount()}/${S.lessons.length}</b><small>уроков</small></div></div>
+ </div>
+ <div class="card"><h3>База знаний <button class="link" data-action="tab" data-tab="base">управление →</button></h3>
+  <div class="status ${S.sync.status}"><span class="dot"></span><span>${esc(S.sync.msg)}</span></div>
+  <button class="btn blue" data-action="sync">🔄 Проверить новые уроки</button>
+  <p class="about" style="text-align:left">Источник: ${esc(S.sync.url)} · ${S.sync.last?'обновлено '+fmtDate(S.sync.last):'ещё не загружалась'}</p>
  </div>
  <div class="card"><h3>План обучения <button class="link" data-action="tab" data-tab="library">библиотека →</button></h3>
-  ${queue.length?queue.map((x,i)=>{const mm=mod(x.module);return `<div class="queue-row" style="--i:${i}" data-action="open-lesson" data-id="${x.id}"><span class="tile" style="background:${hexA(mm.color,.15)}">${mm.icon}</span><span class="mid"><b>${esc(x.title)}</b><i>${esc(mm.title)} · ${x.minutes} мин</i></span><span class="badge new">${i+1}</span></div>`}).join(''):`<div class="empty"><span class="e">🏆</span><b>Курс пройден</b><p>Можно повторять уроки или импортировать новый курс.</p><button class="btn ghost" data-action="tab" data-tab="settings">Импорт курса</button></div>`}
- </div>
- <div class="card"><h3>Напоминания <button class="link" data-action="tab" data-tab="settings">настроить →</button></h3>
-  <p style="font-size:13px;color:var(--muted);line-height:1.55">Интервал: каждые ${S.settings.schedule.interval} ч · окно ${pad(S.settings.schedule.start)}:00–${pad(S.settings.schedule.end)}:00.<br>Для уведомлений на iPhone создайте файл календаря в настройках.</p>
+  ${queue.length?queue.map((x,i)=>{const mm=mod(x.module);return `<div class="row" style="--i:${i}" data-action="open-lesson" data-id="${esc(x.id)}"><span class="tile" style="background:${hexA(mm.color,.15)}">${mm.icon}</span><span class="mid"><b>${esc(x.title)}</b><i>${esc(mm.title)} · ${x.minutes} мин</i></span><span class="badge new">${i+1}</span></div>`}).join(''):`<div class="empty"><span class="e">🏆</span><b>Все уроки пройдены</b><p>Подтяните новые из базы или создайте свои.</p><button class="btn ghost" data-action="sync">Проверить базу</button></div>`}
  </div>`;
  updateClock();
 }
@@ -561,145 +476,262 @@ function filtered(){
  if(f.module!=='all')list=list.filter(l=>l.module===f.module);
  if(f.status==='done')list=list.filter(l=>S.progress[l.id]?.done);
  if(f.status==='new')list=list.filter(l=>!S.progress[l.id]?.done);
- if(f.status==='mine')list=list.filter(l=>l.custom);
- if(f.q){const q=f.q.toLowerCase();list=list.filter(l=>l.title.toLowerCase().includes(q)||l.summary.toLowerCase().includes(q)||mod(l.module).title.toLowerCase().includes(q))}
- if(f.sort==='minutes')list.sort((a,b)=>a.minutes-b.minutes);
- if(f.sort==='alpha')list.sort((a,b)=>a.title.localeCompare(b.title,'ru'));
- if(f.sort==='status')list.sort((a,b)=>(S.progress[a.id]?.done?1:0)-(S.progress[b.id]?.done?1:0));
+ if(f.source==='db')list=list.filter(l=>l.source==='db');
+ if(f.source==='local')list=list.filter(l=>l.local);
+ if(f.q){const q=f.q.toLowerCase();list=list.filter(l=>l.title.toLowerCase().includes(q)||l.summary.toLowerCase().includes(q)||mod(l.module).title.toLowerCase().includes(q)||l.id.toLowerCase().includes(q))}
+ if(f.sort==='minutes')list=[...list].sort((a,b)=>a.minutes-b.minutes);
+ if(f.sort==='alpha')list=[...list].sort((a,b)=>a.title.localeCompare(b.title,'ru'));
+ if(f.sort==='status')list=[...list].sort((a,b)=>(S.progress[a.id]?.done?1:0)-(S.progress[b.id]?.done?1:0));
+ if(f.sort==='module')list=[...list].sort((a,b)=>mod(a.module).title.localeCompare(mod(b.module).title,'ru'));
  return list;
 }
 function lessonRow(l,i){
  const m=mod(l.module),p=S.progress[l.id],manual=S.ui.filters.sort==='manual'&&!bulk;
- return `<div class="lesson-row" style="--i:${Math.min(i,14)}" data-action="${bulk?'row-check':'open-lesson'}" data-id="${l.id}" ${manual?'draggable="true" data-drag="'+l.id+'"':''}>
- ${bulk?`<span class="chk ${sel.has(l.id)?'on':''}">${sel.has(l.id)?'✓':''}</span>`:manual?`<span class="grip">⠿</span>`:''}
+ return `<div class="row" style="--i:${Math.min(i,14)}" data-action="${bulk?'row-check':'open-lesson'}" data-id="${esc(l.id)}" ${manual?`draggable="true" data-drag="${esc(l.id)}"`:''}>
+ ${bulk?`<span class="chk ${sel.has(l.id)?'on':''}">${sel.has(l.id)?'✓':''}</span>`:manual?'<span class="grip">⠿</span>':''}
  <span class="tile" style="background:${hexA(m.color,.15)}">${m.icon}</span>
- <span class="mid"><b>${esc(l.title)}</b><i>${esc(m.title)} · ${l.minutes} мин ${l.custom?'· мой урок':''}</i></span>
- <span class="badge ${p?.done?'done':l.custom?'mine':'new'}">${p?.done?'✓ '+Math.round((p.score||0)*100)+'%':l.minutes+'м'}</span>
- ${manual?`<span class="tools"><button class="tool" data-action="up" data-id="${l.id}">↑</button><button class="tool" data-action="down" data-id="${l.id}">↓</button></span>`:''}
+ <span class="mid"><b>${esc(l.title)}</b><i>${esc(m.title)} · ${l.minutes} мин · ${esc(l.id)}</i></span>
+ <span class="badge ${p?.done?'done':l.local?'local':'db'}">${p?.done?'✓ '+Math.round((p.score||0)*100)+'%':l.local?'мой':'база'}</span>
+ ${manual?`<span class="tools"><button class="tool" data-action="up" data-id="${esc(l.id)}">↑</button><button class="tool" data-action="down" data-id="${esc(l.id)}">↓</button></span>`:''}
  </div>`;
 }
 function renderLibrary(){
  const f=S.ui.filters,list=filtered();
  $('p-library').innerHTML=`
  <div class="title-row"><h2>Библиотека</h2><span class="pill" id="libCount">${list.length}</span><span class="spacer"></span><button class="mini-btn" data-action="bulk">${bulk?'Отмена':'Выбрать'}</button></div>
- <div class="search">🔍<input id="libSearch" placeholder="Поиск урока или темы" value="${esc(f.q)}">${f.q?'<button class="icon-btn" style="width:26px;height:26px;border:0" data-action="clear-search">✕</button>':''}</div>
+ <div class="search">🔍<input id="libSearch" placeholder="Поиск: тема, модуль, id" value="${esc(f.q)}">${f.q?'<button class="icon-btn" style="width:26px;height:26px;border:0" data-action="clear-search">✕</button>':''}</div>
  <div class="chips hscroll">
   <button class="chip ${f.status==='all'?'on':''}" data-action="status" data-status="all">Все</button>
   <button class="chip ${f.status==='new'?'on':''}" data-action="status" data-status="new">Новые</button>
   <button class="chip ${f.status==='done'?'on':''}" data-action="status" data-status="done">Пройденные</button>
-  <button class="chip ${f.status==='mine'?'on':''}" data-action="status" data-status="mine">Мои</button>
-  <select class="sel" id="fModule"><option value="all">Все модули</option>${S.modules.map(m=>`<option value="${m.id}" ${f.module===m.id?'selected':''}>${m.icon} ${esc(m.title)}</option>`).join('')}</select>
-  <select class="sel" id="fSort"><option value="manual" ${f.sort==='manual'?'selected':''}>Мой порядок</option><option value="minutes" ${f.sort==='minutes'?'selected':''}>По минутам</option><option value="alpha" ${f.sort==='alpha'?'selected':''}>По названию</option><option value="status" ${f.sort==='status'?'selected':''}>По статусу</option></select>
+  <button class="chip ${f.source==='local'?'on':''}" data-action="source" data-source="local">Мои</button>
+  <button class="chip ${f.source==='db'?'on':''}" data-action="source" data-source="db">Из базы</button>
+  <select class="sel" id="fModule"><option value="all">Все модули</option>${S.modules.map(m=>`<option value="${esc(m.id)}" ${f.module===m.id?'selected':''}>${m.icon} ${esc(m.title)}</option>`).join('')}</select>
+  <select class="sel" id="fSort"><option value="manual" ${f.sort==='manual'?'selected':''}>Мой порядок</option><option value="module" ${f.sort==='module'?'selected':''}>По модулю</option><option value="minutes" ${f.sort==='minutes'?'selected':''}>По минутам</option><option value="alpha" ${f.sort==='alpha'?'selected':''}>По названию</option><option value="status" ${f.sort==='status'?'selected':''}>По статусу</option></select>
  </div>
+ <div class="chips hscroll">
+  <button class="chip gold" data-action="view-toggle">★ Виды</button>
+  ${S.ui.views.map((v,i)=>`<button class="chip" data-action="view-apply" data-i="${i}">${esc(v.name)} <span data-action="view-del" data-i="${i}" style="color:var(--red)">✕</span></button>`).join('')}
+ </div>
+ ${viewRow?`<div class="bulk"><input class="input" id="viewName" placeholder="Название вида" style="flex:1;padding:7px 10px"><button class="mini-btn" data-action="view-save">OK</button></div>`:''}
  ${bulk?`<div class="bulk"><span>Выбрано: <b>${sel.size}</b></span><span class="spacer"></span><button class="mini-btn" data-action="bulk-all">Все</button><button class="mini-btn danger" data-action="bulk-del" ${sel.size?'':'disabled'}>Удалить</button></div>`:''}
- <div id="libList">${list.length?list.map(lessonRow).join(''):`<div class="empty"><span class="e">🔎</span><b>Ничего не найдено</b><p>Измените фильтры или добавьте свой урок.</p><button class="btn ghost" data-action="reset-filters">Сбросить фильтры</button></div>`}</div>
+ <div id="libList">${list.length?list.map(lessonRow).join(''):`<div class="empty"><span class="e">🔎</span><b>Ничего не найдено</b><p>Измените фильтры или добавьте урок.</p><button class="btn ghost" data-action="reset-filters">Сбросить фильтры</button></div>`}</div>
  <button class="btn ghost" style="margin-top:12px" data-action="add-lesson">＋ Добавить свой урок</button>`;
 }
-function renderLibraryList(){const list=filtered();$('libCount').textContent=list.length;$('libList').innerHTML=list.length?list.map(lessonRow).join(''):`<div class="empty"><span class="e">🔎</span><b>Ничего не найдено</b><p>Измените фильтры или добавьте свой урок.</p><button class="btn ghost" data-action="reset-filters">Сбросить фильтры</button></div>`}
+function renderLibraryList(){const list=filtered();const c=$('libCount'),b=$('libList');if(c)c.textContent=list.length;if(b)b.innerHTML=list.length?list.map(lessonRow).join(''):`<div class="empty"><span class="e">🔎</span><b>Ничего не найдено</b><p>Измените фильтры или добавьте урок.</p><button class="btn ghost" data-action="reset-filters">Сбросить фильтры</button></div>`}
 function xpChart(){
- const days=[];for(let i=29;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);days.push({date:iso(d),xp:S.activity[iso(d)]?.xp||0})}
- let cum=0;const pts=days.map(d=>{cum+=d.xp;return cum});const max=Math.max(cum,100);
- const W=340,H=145,pad=18;const step=(W-pad*2)/(pts.length-1);
- const path=pts.map((v,i)=>`${i?'L':'M'}${(pad+i*step).toFixed(1)},${(H-pad-v/max*(H-pad*2)).toFixed(1)}`).join(' ');
- const area=`${path} L${W-pad},${H-pad} L${pad},${H-pad} Z`;
- return `<svg class="chart" viewBox="0 0 340 145"><defs><linearGradient id="xpGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2EE59D" stop-opacity=".35"/><stop offset="1" stop-color="#2EE59D" stop-opacity="0"/></linearGradient></defs>
- <line class="grid" x1="18" y1="20" x2="322" y2="20"/><line class="grid" x1="18" y1="72" x2="322" y2="72"/><line class="grid" x1="18" y1="127" x2="322" y2="127"/>
- <path class="area" d="${area}"/><path class="line" d="${path}"/>
- <text x="18" y="14">+${cum} XP за 30 дней</text><text x="270" y="140">сегодня</text></svg>`;
+ const days=[];for(let i=29;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);days.push(S.activity[iso(d)]?.xp||0)}
+ let cum=0;const pts=days.map(v=>(cum+=v));const max=Math.max(cum,100),W=340,H=145,pd=18,step=(W-pd*2)/(pts.length-1||1);
+ const path=pts.map((v,i)=>`${i?'L':'M'}${(pd+i*step).toFixed(1)},${(H-pd-v/max*(H-pd*2)).toFixed(1)}`).join(' ');
+ return `<svg class="chart" viewBox="0 0 340 145"><defs><linearGradient id="xpGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2EE59D" stop-opacity=".35"/><stop offset="1" stop-color="#2EE59D" stop-opacity="0"/></linearGradient></defs><line class="grid" x1="18" y1="20" x2="322" y2="20"/><line class="grid" x1="18" y1="72" x2="322" y2="72"/><line class="grid" x1="18" y1="127" x2="322" y2="127"/><path class="area" d="${path} L${W-pd},${H-pd} L${pd},${H-pd} Z"/><path class="line" d="${path}"/><text x="18" y="14">+${cum} XP за 30 дней</text><text x="272" y="140">сегодня</text></svg>`;
 }
-function heatHTML(){let out='';for(let i=69;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const a=S.activity[iso(d)];const min=a?.minutes||0;const l=min===0?0:min<6?1:min<15?2:min<30?3:4;out+=`<div data-l="${l}" title="${iso(d)} · ${min} мин"></div>`}return out}
+function heatHTML(){let o='';for(let i=69;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const min=S.activity[iso(d)]?.minutes||0,l=min===0?0:min<6?1:min<15?2:min<30?3:4;o+=`<div data-l="${l}" title="${iso(d)} · ${min} мин"></div>`}return o}
 function renderProgress(){
- const done=Object.values(S.progress).filter(p=>p.done).length,acc=accuracy();
- const badges=[
-  ['🌱','Первый шаг',done>=1],['🔥','Серия 7 дней',streak()>=7],['⚡','500 XP',S.xp>=500],
-  ['🎯','Точность 90%',acc>=.9&&done>=4],['📚','10 уроков',done>=10],['🏆','Курс пройден',done===S.lessons.length&&done>0]
- ];
+ const dn=doneCount(),acc=accuracy();
+ const badges=[['🌱','Первый шаг',dn>=1],['🔥','Серия 7 дней',streak()>=7],['⚡','500 XP',S.xp>=500],['🎯','Точность 90%',acc>=.9&&dn>=4],['📚','20 уроков',dn>=20],['🏆','Курс пройден',dn===S.lessons.length&&dn>0]];
  $('p-progress').innerHTML=`
- <div class="title-row"><h2>Прогресс</h2><span class="pill">${Math.round(done/S.lessons.length*100)}%</span></div>
+ <div class="title-row"><h2>Прогресс</h2><span class="pill">${S.lessons.length?Math.round(dn/S.lessons.length*100):0}%</span></div>
  <div class="card"><h3>Кривая опыта</h3>${xpChart()}</div>
  <div class="card"><h3>Активность · 70 дней</h3><div class="heat">${heatHTML()}</div><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--faint);margin-top:8px"><span>меньше</span><span>больше</span></div></div>
- <div class="card"><h3>Модули</h3>${S.modules.map(m=>{const ls=S.lessons.filter(l=>l.module===m.id),dn=ls.filter(l=>S.progress[l.id]?.done).length,p=ls.length?dn/ls.length*100:0;return `<div class="module-bar"><div class="topline"><span>${m.icon} ${esc(m.title)}</span><b>${dn}/${ls.length}</b></div><div class="track"><div class="fill" data-w="${p}" style="background:${m.color}"></div></div></div>`}).join('')}</div>
- <div class="tiles">
-  <div class="tile-stat"><i>Точность</i><b>${Math.round(acc*100)}%</b><small>средний результат тестов</small></div>
-  <div class="tile-stat"><i>Время в обучении</i><b>${totalMinutes()} мин</b><small>за всё время</small></div>
-  <div class="tile-stat"><i>Лучший результат</i><b>${Math.round(Math.max(0,...Object.values(S.progress).map(p=>p.score||0))*100)}%</b><small>по урокам</small></div>
- </div>
+ <div class="card"><h3>Модули</h3>${S.modules.map(m=>{const ls=S.lessons.filter(l=>l.module===m.id),d=ls.filter(l=>S.progress[l.id]?.done).length,p=ls.length?d/ls.length*100:0;return `<div class="mbar"><div class="tl"><span>${m.icon} ${esc(m.title)}</span><b>${d}/${ls.length}</b></div><div class="track"><div class="fill" data-w="${p}" style="background:${m.color}"></div></div></div>`}).join('')}</div>
+ <div class="tiles"><div class="tstat"><i>Точность</i><b>${Math.round(acc*100)}%</b><small>средний результат</small></div><div class="tstat"><i>Время</i><b>${totalMinutes()} мин</b><small>за всё время</small></div><div class="tstat"><i>Уроков в базе</i><b>${S.lessons.length}</b><small>${S.modules.length} модулей</small></div></div>
  <div class="card" style="margin-top:12px"><h3>Достижения</h3><div class="badges">${badges.map(([e,t,on])=>`<div class="ach ${on?'':'lock'}"><span class="e">${e}</span><b>${t}</b></div>`).join('')}</div></div>`;
  requestAnimationFrame(()=>requestAnimationFrame(()=>$$('#p-progress .fill').forEach(f=>f.style.width=f.dataset.w+'%')));
 }
-function reminderHours(){const sc=S.settings.schedule,arr=[];for(let h=sc.start;h<=sc.end;h+=sc.interval)arr.push(h);return arr}
-function renderSettings(){
- const sc=S.settings.schedule,hrs=reminderHours();
- $('p-settings').innerHTML=`
- <div class="title-row"><h2>Настройки</h2></div>
- <div class="set-card"><h4>Расписание</h4>
-  <div class="set-row"><label>Интервал</label><select class="input" id="setInterval"><option value="2" ${sc.interval===2?'selected':''}>каждые 2 ч</option><option value="3" ${sc.interval===3?'selected':''}>каждые 3 ч</option><option value="4" ${sc.interval===4?'selected':''}>каждые 4 ч</option><option value="6" ${sc.interval===6?'selected':''}>каждые 6 ч</option></select></div>
-  <div class="set-row"><label>Начало дня</label><select class="input" id="setStart">${Array.from({length:24},(_,i)=>`<option value="${i}" ${sc.start===i?'selected':''}>${pad(i)}:00</option>`).join('')}</select></div>
-  <div class="set-row"><label>Конец дня</label><select class="input" id="setEnd">${Array.from({length:24},(_,i)=>`<option value="${i}" ${sc.end===i?'selected':''}>${pad(i)}:00</option>`).join('')}</select></div>
-  <div class="set-row"><label>Длина занятия</label><select class="input" id="setLength"><option value="5" ${sc.length===5?'selected':''}>5 мин</option><option value="7" ${sc.length===7?'selected':''}>7 мин</option><option value="10" ${sc.length===10?'selected':''}>10 мин</option></select></div>
-  <div class="mini">Напоминания в календаре</div>
-  <div class="chips hscroll">${hrs.map(h=>`<span class="chip on">${pad(h)}:00</span>`).join('')}</div>
-  <button class="btn gold" style="margin-top:10px" data-action="ics">🔔 Создать напоминания для iPhone</button>
-  <p class="about" style="text-align:left">Файл .ics добавит повторяющиеся события в Календарь iPhone. Уведомления придут от Календаря. Для настоящих фоновых push-уведомлений от самого приложения нужен сервер — это ограничение iOS для статических PWA.</p>
- </div>
- <div class="set-card"><h4>Контент</h4>
-  <div class="data-btns">
-   <button class="data-btn" data-action="add-lesson">＋ Свой урок</button>
-   <button class="data-btn" data-action="import">📥 Импорт JSON</button>
-   <button class="data-btn" data-action="template">📄 Шаблон курса</button>
-   <button class="data-btn" data-action="reset-course">↺ Вернуть курс</button>
-  </div>
- </div>
- <div class="set-card"><h4>Данные</h4>
-  <div class="data-btns">
-   <button class="data-btn" data-action="export">💾 Экспорт всего</button>
-   <button class="data-btn" data-action="wipe">🗑 Сброс прогресса</button>
-  </div>
-  <p class="about">${S.lessons.length} ${plural(S.lessons.length,'урок','урока','уроков')} · ${S.xp} XP · данные только на этом устройстве.</p>
- </div>
- <p class="about">Компаунд v1.0 · образовательный проект.<br>Материалы о финансах не являются индивидуальной инвестиционной рекомендацией.</p>`;
-}
-function renderAll(){renderSound();renderTicker();renderTabs();$$('.panel').forEach(p=>p.classList.toggle('active',p.id==='p-'+tab));renderHome();renderLibrary();renderProgress();renderSettings()}
-function switchTab(t){tab=t;saveUI();renderAll()}
+function reminderHours(){const sc=S.settings.schedule,a=[];for(let h=sc.start;h<=sc.end;h+=sc.interval)a.push(h);return a}
+function promptText(){
+ const g=id=>$(id)?.value.trim()||'';
+ const topic=g('pgTopic')||'Финансовая грамотность, инвестиции и трейдинг';
+ const level=g('pgLevel')||'новичок';
+ const count=g('pgCount')||'12';
+ const minutes=g('pgMinutes')||'6';
+ const tone=g('pgTone')||'простой, с примерами';
+ const extra=g('pgExtra')||'практические задания и типовые ошибки';
+ const avoid=g('pgAvoid')||'обещания доходности, сигналы, реклама брокеров';
+ const ids=S.lessons.map(l=>l.id).join(', ');
+ return `Ты — методист, финансовый преподаватель и редактор учебного контента.
 
+Создай файл базы уроков lessons.json для PWA-приложения микрообучения.
+
+ПАРАМЕТРЫ:
+Тема: ${topic}
+Уровень ученика: ${level}
+Количество новых уроков: ${count}
+Длительность одного урока: ${minutes} минут
+Тон объяснений: ${tone}
+Обязательно включить: ${extra}
+Исключить: ${avoid}
+Язык: русский
+
+ТРЕБОВАНИЯ К КАЧЕСТВУ:
+1. Никаких инвестиционных рекомендаций, сигналов и обещаний доходности.
+2. Только образовательный контент: понятия, принципы, расчёты, риски, типовые ошибки.
+3. Каждый урок самостоятельный и понятный без интернета.
+4. В каждом уроке 1 тестовый вопрос с 4 вариантами и объяснением.
+5. Не выдумывать статистику, котировки и «секретные стратегии».
+6. Формулы давать в простом виде, пригодном для чтения с телефона.
+7. Все id должны быть уникальными, латиницей, в формате topic-01.
+
+УЖЕ ЕСТЬ В БАЗЕ (НЕ ПОВТОРЯЙ ЭТИ ID):
+${ids}
+
+ВЕРНИ ТОЛЬКО ВАЛИДНЫЙ JSON БЕЗ ПОЯСНЕНИЙ И БЕЗ MARKDOWN.
+
+Структура:
+{
+  "title": "Название курса",
+  "modules": [
+    { "id": "m-fin", "title": "Финансовая база", "color": "#F5C451", "icon": "🧭" }
+  ],
+  "lessons": [
+    {
+      "id": "fin-07",
+      "module": "m-fin",
+      "title": "Название урока",
+      "minutes": 6,
+      "summary": "Одно предложение о сути урока",
+      "blocks": [
+        { "t": "p", "text": "Объяснение простыми словами." },
+        { "t": "ul", "items": ["Тезис 1", "Тезис 2", "Тезис 3"] },
+        { "t": "tip", "text": "Практический совет." },
+        { "t": "warn", "text": "Предупреждение о риске." }
+      ],
+      "quiz": [
+        { "q": "Вопрос", "a": ["A", "B", "C", "D"], "c": 1, "x": "Почему ответ верный" }
+      ]
+    }
+  ]
+}
+
+Допустимые типы блоков: p, ul, tip, warn, formula.
+Поле c — индекс правильного ответа, начиная с 0.
+Верни готовый JSON, который можно сразу сохранить как lessons.json.`;
+}
+function renderBase(){
+ const sc=S.settings.schedule,st=S.sync;
+ let body='';
+ if(baseSeg==='sync'){
+  body=`
+  <div class="set-card"><h4>Источник базы</h4>
+   <div class="status ${st.status}"><span class="dot"></span><span>${esc(st.msg)}</span></div>
+   <label class="mini">Путь или URL к lessons.json</label>
+   <input class="input" id="syncUrl" style="width:100%" value="${esc(st.url)}" placeholder="lessons.json">
+   <div class="set-row"><label>Автопроверка при открытии</label><button class="mini-btn" data-action="toggle-auto">${S.settings.autoSync?'ВКЛ':'ВЫКЛ'}</button></div>
+   <button class="btn blue" style="margin-top:10px" data-action="save-url">💾 Сохранить адрес</button>
+   <button class="btn primary" style="margin-top:9px" data-action="sync">🔄 Проверить новые уроки</button>
+   <p class="about" style="text-align:left">Приложение добавляет новые уроки по id и обновляет существующие, не сбрасывая прогресс. Локально изменённые уроки не перезаписываются.</p>
+  </div>
+  <div class="set-card"><h4>Файлы базы</h4>
+   <div class="data-btns">
+    <button class="data-btn blue" data-action="import">📥 Импорт JSON</button>
+    <button class="data-btn" data-action="export-db">⛁ Скачать базу</button>
+    <button class="data-btn gold" data-action="export">💾 Бэкап всего</button>
+    <button class="data-btn danger" data-action="wipe">🗑 Сброс прогресса</button>
+   </div>
+   <p class="about">${S.lessons.length} ${plural(S.lessons.length,'урок','урока','уроков')} · ${S.modules.length} ${plural(S.modules.length,'модуль','модуля','модулей')} · ${st.last?'проверка '+fmtDate(st.last):'проверки не было'}</p>
+  </div>`;
+ }
+ if(baseSeg==='prompt'){
+  body=`
+  <div class="set-card"><h4>Генератор промта</h4>
+   <div class="form-grid">
+    <label>Тема<input class="input" id="pgTopic" value="Финансовая грамотность, инвестиции и трейдинг"></label>
+    <label>Уровень<select class="input" id="pgLevel"><option>новичок</option><option>средний</option><option>продвинутый</option></select></label>
+    <label>Новых уроков<input class="input" id="pgCount" type="number" min="1" max="60" value="12"></label>
+    <label>Минут на урок<input class="input" id="pgMinutes" type="number" min="3" max="20" value="6"></label>
+    <label>Тон<select class="input" id="pgTone"><option>простой, с примерами</option><option>профессиональный</option><option>как для новичка</option><option>сжато и по делу</option></select></label>
+    <label>Что включить<input class="input" id="pgExtra" value="практические задания и типовые ошибки"></label>
+    <label>Что исключить<input class="input" id="pgAvoid" value="обещания доходности, сигналы, реклама брокеров"></label>
+   </div>
+   <button class="btn gold" style="margin-top:12px" data-action="build-prompt">✨ Собрать промт</button>
+   <textarea class="input" id="promptOut" style="margin-top:10px;min-height:190px" readonly placeholder="Промт появится здесь"></textarea>
+   <div class="btn-row" style="margin-top:9px"><button class="btn ghost" data-action="copy-prompt">📋 Копировать</button><button class="btn ghost" data-action="save-prompt">⬇︎ .txt</button></div>
+  </div>`;
+ }
+ if(baseSeg==='settings'){
+  const hrs=reminderHours();
+  body=`
+  <div class="set-card"><h4>Расписание</h4>
+   <div class="set-row"><label>Интервал</label><select class="input" id="setInterval"><option value="2" ${sc.interval===2?'selected':''}>каждые 2 ч</option><option value="3" ${sc.interval===3?'selected':''}>каждые 3 ч</option><option value="4" ${sc.interval===4?'selected':''}>каждые 4 ч</option><option value="6" ${sc.interval===6?'selected':''}>каждые 6 ч</option></select></div>
+   <div class="set-row"><label>Начало дня</label><select class="input" id="setStart">${Array.from({length:24},(_,i)=>`<option value="${i}" ${sc.start===i?'selected':''}>${pad(i)}:00</option>`).join('')}</select></div>
+   <div class="set-row"><label>Конец дня</label><select class="input" id="setEnd">${Array.from({length:24},(_,i)=>`<option value="${i}" ${sc.end===i?'selected':''}>${pad(i)}:00</option>`).join('')}</select></div>
+   <div class="set-row"><label>Длина занятия</label><select class="input" id="setLength"><option value="5" ${sc.length===5?'selected':''}>5 мин</option><option value="7" ${sc.length===7?'selected':''}>7 мин</option><option value="10" ${sc.length===10?'selected':''}>10 мин</option></select></div>
+   <div class="mini">Времена напоминаний</div><div class="chips hscroll">${hrs.map(h=>`<span class="chip on">${pad(h)}:00</span>`).join('')}</div>
+   <button class="btn gold" style="margin-top:10px" data-action="ics">🔔 Напоминания для iPhone</button>
+   <p class="about" style="text-align:left">Файл .ics добавит события в Календарь iPhone, и уведомления придут от него. Для фоновых push от самого приложения нужен сервер — это ограничение iOS для статических PWA.</p>
+  </div>
+  <div class="set-card"><h4>Приложение</h4>
+   <div class="data-btns"><button class="data-btn" data-action="sound">${S.settings.sound?'🔊 Звук вкл':'🔇 Звук выкл'}</button><button class="data-btn gold" data-action="add-lesson">＋ Свой урок</button></div>
+   <p class="about">Компаунд v3.0 · база отдельно, прогресс отдельно.<br>Материалы не являются индивидуальной инвестиционной рекомендацией.</p>
+  </div>`;
+ }
+ $('p-base').innerHTML=`<div class="title-row"><h2>База и настройки</h2></div>
+ <div class="seg" style="margin-bottom:12px">
+  <button class="${baseSeg==='sync'?'on':''}" data-action="base-seg" data-seg="sync">Синхронизация</button>
+  <button class="${baseSeg==='prompt'?'on':''}" data-action="base-seg" data-seg="prompt">Промт</button>
+  <button class="${baseSeg==='settings'?'on':''}" data-action="base-seg" data-seg="settings">Расписание</button>
+ </div>${body}`;
+}
+function renderAll(){renderSound();renderTicker();renderTabs();$$('.panel').forEach(p=>p.classList.toggle('active',p.id==='p-'+tab));renderHome();renderLibrary();renderProgress();renderBase()}
+function switchTab(t){tab=t;saveUI();renderAll()}
+function switchBase(s){baseSeg=s;saveUI();renderBase()}
+
+/* ---------- шторки ---------- */
 function openSheet(id){$(id).classList.remove('closing');$(id).classList.add('open')}
 function closeSheet(id){const s=$(id);if(!s.classList.contains('open'))return;s.classList.add('closing');setTimeout(()=>s.classList.remove('open','closing'),210)}
-function openLesson(id){const l=lesson(id);if(!l)return;detailId=id;const m=mod(l.module),p=S.progress[id];
- $('lessonBody').innerHTML=`
- <div style="display:flex;gap:12px;align-items:center;margin:8px 0 14px"><span class="tile" style="width:54px;height:54px;font-size:27px;border-radius:17px;background:${hexA(m.color,.16)}">${m.icon}</span><div><div style="font-size:18px;font-weight:900">${esc(l.title)}</div><div style="font-size:12px;color:var(--muted)">${esc(m.title)} · ${l.minutes} мин · ${l.quiz.length} ${plural(l.quiz.length,'вопрос','вопроса','вопросов')}</div></div></div>
- <p style="font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:12px">${esc(l.summary)}</p>
- ${p?.done?`<div class="note">✅ Урок пройден ${p.at}. Результат: ${Math.round((p.score||0)*100)}%. Попыток: ${p.attempts||1}.</div>`:''}
- <div class="mini">Содержание</div>
- <div class="lesson-content">${l.blocks.slice(0,2).map(blockHTML).join('')}</div>`;
- $('lessonFoot').innerHTML=`<div class="btn-row"><button class="btn primary" data-action="study" data-id="${id}">${p?.done?'Повторить':'Учить'}</button><button class="btn ghost" data-action="edit-lesson" data-id="${id}">✏️</button><button class="btn danger" data-action="del-lesson" data-id="${id}">🗑</button></div>`;
- openSheet('lessonSheet')}
-function deleteLesson(id){const l=lesson(id);if(!l)return;confirmBox(`Удалить «${l.title}»?`,'Урок и его прогресс будут удалены. Действие можно отменить.','Удалить').then(ok=>{if(!ok)return;pushUndo();S.lessons=S.lessons.filter(x=>x.id!==id);S.order=S.order.filter(x=>x!==id);delete S.progress[id];save();closeSheet('lessonSheet');renderAll();toast('Урок удалён','🗑',{label:'Отменить',fn:doUndo})})}
+function openLesson(id){
+ const l=lesson(id);if(!l)return;detailId=id;const m=mod(l.module),p=S.progress[id];
+ $('lessonBody').innerHTML=`<div style="display:flex;gap:12px;align-items:center;margin:8px 0 14px"><span class="tile" style="width:54px;height:54px;font-size:27px;border-radius:17px;background:${hexA(m.color,.16)}">${m.icon}</span><div><div style="font-size:18px;font-weight:900">${esc(l.title)}</div><div style="font-size:12px;color:var(--muted)">${esc(m.title)} · ${l.minutes} мин · ${l.quiz.length} ${plural(l.quiz.length,'вопрос','вопроса','вопросов')}</div></div></div>
+ <p style="font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:10px">${esc(l.summary)}</p>
+ <div class="chips"><span class="badge ${l.local?'local':'db'}">${l.local?'локальный':'из базы'}</span><span class="badge">${esc(l.id)}</span></div>
+ ${p?.done?`<div class="note">✅ Пройден ${esc(p.at)}. Результат ${Math.round((p.score||0)*100)}%. Попыток: ${p.attempts||1}.</div>`:''}
+ <div class="mini">Начало урока</div><div class="lesson-content">${l.blocks.slice(0,2).map(blockHTML).join('')}</div>`;
+ $('lessonFoot').innerHTML=`<div class="btn-row"><button class="btn primary" data-action="study" data-id="${esc(id)}">${p?.done?'Повторить':'Учить'}</button><button class="btn ghost" data-action="edit-lesson" data-id="${esc(id)}">✏️</button><button class="btn danger" data-action="del-lesson" data-id="${esc(id)}">🗑</button></div>`;
+ openSheet('lessonSheet');
+}
+function deleteLesson(id){
+ const l=lesson(id);if(!l)return;
+ confirmBox(`Удалить «${l.title}»?`,'Урок и его прогресс будут удалены. Действие можно отменить.','Удалить').then(ok=>{
+  if(!ok)return;pushUndo();S.lessons=S.lessons.filter(x=>x.id!==id);S.order=S.order.filter(x=>x!==id);delete S.progress[id];
+  save();closeSheet('lessonSheet');renderAll();toast('Урок удалён','🗑',{label:'Отменить',fn:doUndo});
+ });
+}
 function moveLesson(id,dir){const i=S.order.indexOf(id),j=i+dir;if(i<0||j<0||j>=S.order.length)return;[S.order[i],S.order[j]]=[S.order[j],S.order[i]];save();renderLibrary()}
-function openEdit(id){editId=id||null;const l=id?lesson(id):null;
+function openEdit(id){
+ editId=id||null;const l=id?lesson(id):null;
  $('edTitle').textContent=l?'Редактирование урока':'Новый урок';
+ $('edId').value=l?.id||'';$('edId').disabled=!!l;
  $('edName').value=l?.title||'';$('edMinutes').value=l?.minutes||6;$('edSummary').value=l?.summary||'';
- $('edModule').innerHTML=S.modules.map(m=>`<option value="${m.id}" ${l?.module===m.id?'selected':''}>${m.icon} ${esc(m.title)}</option>`).join('');
- $('edText').value=l?l.blocks.filter(b=>b.t==='p'||b.t==='ul').map(b=>b.t==='p'?b.text:b.items.map(i=>'- '+i).join('\n')).join('\n\n'):'';
+ $('edModule').innerHTML=S.modules.map(m=>`<option value="${esc(m.id)}" ${l?.module===m.id?'selected':''}>${m.icon} ${esc(m.title)}</option>`).join('');
+ $('edText').value=l?l.blocks.filter(b=>['p','ul','tip','warn','formula'].includes(b.t)).map(b=>b.t==='ul'?b.items.map(i=>'- '+i).join('\n'):b.text).join('\n\n'):'';
  const q=l?.quiz?.[0];$('edQ').value=q?.q||'';[0,1,2,3].forEach(i=>$('edA'+i).value=q?.a?.[i]||'');$('edCorrect').value=String(q?.c??0);$('edExplain').value=q?.x||'';$('edErr').textContent='';
- closeSheet('lessonSheet');openSheet('editSheet')}
-function parseText(text){const parts=text.split(/\n\s*\n/).map(s=>s.trim()).filter(Boolean),out=[];for(const p of parts){const lines=p.split('\n').map(s=>s.trim()).filter(Boolean);if(lines.every(l=>l.startsWith('- ')))out.push({t:'ul',items:lines.map(l=>l.slice(2))});else out.push({t:'p',text:lines.join(' ')})}return out}
+ closeSheet('lessonSheet');openSheet('editSheet');
+}
 function saveEdit(){
- const title=$('edName').value.trim(),module=$('edModule').value,minutes=clamp(+$('edMinutes').value||6,3,20),summary=$('edSummary').value.trim(),text=$('edText').value.trim();
+ const id=$('edId').value.trim(),title=$('edName').value.trim(),module=$('edModule').value,minutes=clamp(+$('edMinutes').value||6,3,25),summary=$('edSummary').value.trim(),text=$('edText').value.trim();
  if(!title){$('edErr').textContent='Введите название';return}
  if(!text){$('edErr').textContent='Добавьте текст урока';return}
+ if(!editId&&!id){$('edErr').textContent='Введите уникальный id латиницей';return}
+ if(!editId&&lesson(id)){$('edErr').textContent='Такой id уже есть';return}
  const q=$('edQ').value.trim(),a=[0,1,2,3].map(i=>$('edA'+i).value.trim()).filter(Boolean),c=+$('edCorrect').value;
- let quiz=[];if(q){if(a.length<2||!a[c]){$('edErr').textContent='Для теста нужно минимум 2 варианта и правильный ответ';return}quiz=[{q,a,c,x:$('edExplain').value.trim()||'Правильный ответ отмечен.'}]}
+ let quiz=[];if(q){if(a.length<2||!a[c]){$('edErr').textContent='Для теста нужно минимум 2 варианта и корректный правильный ответ';return}quiz=[{q,a,c,x:$('edExplain').value.trim()||'Ответ отмечен верно.'}]}
  const blocks=parseText(text);
- if(editId){const l=lesson(editId);Object.assign(l,{title,module,minutes,summary:summary||title,blocks,quiz,custom:true});toast('Урок обновлён','✏️')}
- else{const id=uid();S.lessons.push({id,module,title,minutes,summary:summary||title,blocks,quiz,custom:true});S.order.push(id);toast('Урок добавлен','📘')}
- save();closeSheet('editSheet');renderAll()}
+ if(editId){const l=lesson(editId);Object.assign(l,{title,module,minutes,summary:summary||title,blocks,quiz,local:true,source:'local'});toast('Урок обновлён','✏️')}
+ else{S.lessons.push({id,module,title,minutes,summary:summary||title,blocks,quiz,local:true,source:'local'});S.order.push(id);toast('Урок добавлен','📘')}
+ save();closeSheet('editSheet');renderAll();
+}
 
-function startSession(id){const l=id?lesson(id):nextLesson();if(!l)return;session={lesson:l,step:'read',qi:0,correct:0,locked:false,start:Date.now()};closeSheet('lessonSheet');$('session').classList.add('open');renderSession();sound('tap')}
+/* ---------- сессия ---------- */
+function startSession(id){
+ const l=id?lesson(id):nextLesson();if(!l){toast('В базе пока нет уроков','⚠️');return}
+ session={lesson:l,step:'read',qi:0,correct:0,locked:false,start:Date.now()};
+ closeSheet('lessonSheet');$('session').classList.add('open');renderSession();sound('tap');
+}
 function renderSession(){
  const l=session.lesson,m=mod(l.module);
  $('sTitle').textContent=l.title;$('sMeta').textContent=`${m.icon} ${m.title} · ${l.minutes} мин`;
  if(session.step==='read'){
-  $('sBody').innerHTML=`<div class="mini">${esc(l.summary)}</div><div class="lesson-content">${l.blocks.map(blockHTML).join('')}</div><div class="note">Прочитайте спокойно. После текста — короткая проверка. Обычно это занимает ${l.minutes} минут.</div>`;
+  $('sBody').innerHTML=`<div class="mini">${esc(l.summary)}</div><div class="lesson-content">${l.blocks.map(blockHTML).join('')}</div><div class="note">После текста — короткая проверка. Урок рассчитан примерно на ${l.minutes} минут.</div>`;
   $('sFoot').innerHTML=`<button class="btn primary" data-action="${l.quiz.length?'to-quiz':'finish'}">${l.quiz.length?'К проверке →':'Завершить урок'}</button>`;
  }
  if(session.step==='quiz'){
@@ -708,24 +740,24 @@ function renderSession(){
   $('sFoot').innerHTML=`<button class="btn ghost" id="nextQ" data-action="next-q" disabled>Далее</button>`;
  }
  if(session.step==='done'){
-  const score=l.quiz.length?session.correct/l.quiz.length:1;const xp=session.xp;
-  $('sBody').innerHTML=`<div class="result"><div class="big">${score>=.8?'🏆':score>=.5?'👍':'📘'}</div><h2>${score>=.8?'Отличная сессия':score>=.5?'Хороший результат':'Есть что повторить'}</h2><p>${l.quiz.length?`Правильных ответов: ${session.correct} из ${l.quiz.length}`:'Урок изучен без теста'}</p><div class="xp-pop">+${xp} XP</div><p>Следующая сессия: ${fmtClock(S.nextDue)}<br>Серия: ${streak()} ${plural(streak(),'день','дня','дней')} 🔥</p></div>`;
+  const score=l.quiz.length?session.correct/l.quiz.length:1;
+  $('sBody').innerHTML=`<div class="result"><div class="big">${score>=.8?'🏆':score>=.5?'👍':''}</div><h2>${score>=.8?'Отличная сессия':score>=.5?'Хороший результат':'Стоит повторить'}</h2><p>${l.quiz.length?`Верных ответов: ${session.correct} из ${l.quiz.length}`:'Урок изучен'}</p><div class="xp-pop">+${session.xp} XP</div><p>Следующая сессия: ${fmtClock(S.nextDue)}<br>Серия: ${streak()} ${plural(streak(),'день','дня','дней')} 🔥</p></div>`;
   $('sFoot').innerHTML=`<div class="btn-row"><button class="btn primary" data-action="s-done">Готово</button><button class="btn ghost" data-action="s-next">Следующий урок</button></div>`;
  }
  $('sBody').scrollTop=0;
 }
 function answer(i){
- if(session.locked)return;session.locked=true;const q=session.lesson.quiz[session.qi],ok=i===q.c;
- if(ok){session.correct++;sound('ok')}else sound('no');
+ if(session.locked)return;session.locked=true;
+ const q=session.lesson.quiz[session.qi],ok=i===q.c;if(ok){session.correct++;sound('ok')}else sound('no');
  $$('#sBody .option').forEach((b,j)=>{b.disabled=true;if(j===q.c)b.classList.add('correct');if(j===i&&!ok)b.classList.add('wrong')});
  $('explain').innerHTML=`<div class="explain">${ok?'✅ Верно.':'❌ Не совсем.'} ${esc(q.x)}</div>`;
- const btn=$('nextQ');btn.disabled=false;btn.textContent=session.qi===session.lesson.quiz.length-1?'К результату':'Следующий вопрос';btn.className='btn primary';
+ const btn=$('nextQ');btn.disabled=false;btn.className='btn primary';btn.textContent=session.qi===session.lesson.quiz.length-1?'К результату':'Следующий вопрос';
 }
 function finishSession(){
- const l=session.lesson,sc=l.quiz.length?session.correct/l.quiz.length:1;
- const firstToday=!S.activity[today()]?.sessions;const xp=30+Math.round(sc*50)+(firstToday?15:0);
+ const l=session.lesson,score=l.quiz.length?session.correct/l.quiz.length:1;
+ const firstToday=!S.activity[today()]?.sessions,xp=30+Math.round(score*50)+(firstToday?15:0);
  const prev=S.progress[l.id];
- S.progress[l.id]={done:true,score:sc,at:today(),attempts:(prev?.attempts||0)+1};
+ S.progress[l.id]={done:true,score,at:today(),attempts:(prev?.attempts||0)+1};
  const a=S.activity[today()]||{minutes:0,xp:0,sessions:0};a.minutes+=l.minutes;a.xp+=xp;a.sessions++;S.activity[today()]=a;
  S.xp+=xp;S.nextDue=computeNextDue(Date.now());session.xp=xp;session.step='done';dueFlag=false;$('dueBanner').classList.remove('show');
  save();renderSession();renderAll();confetti();sound('win');
@@ -735,51 +767,54 @@ function updateClock(){
  const rem=S.nextDue-Date.now(),due=rem<=0;
  $$('[data-countdown]').forEach(e=>{e.textContent=due?'Пора!':fmtTime(rem);e.classList.toggle('due',due)});
  $$('[data-due]').forEach(e=>e.textContent=due?'NOW':fmtTime(rem));
- const ring=$('dueRing');if(ring){const total=S.settings.schedule.interval*3600000,p=clamp(rem/total,0,1);ring.style.strokeDashoffset=201*(1-p);ring.style.stroke=due?'var(--gold)':'var(--green)'}
- if(due&&S.settings.inApp&&!$('session').classList.contains('open')){$('dueBanner').classList.add('show');if(!dueFlag){dueFlag=true;try{if('Notification'in window&&Notification.permission==='granted')new Notification('Компаунд',{body:'Пора учиться: '+nextLesson().title})}catch(e){}}}
+ const ring=$('dueRing');if(ring){const p=clamp(rem/(S.settings.schedule.interval*3600000),0,1);ring.style.strokeDashoffset=201*(1-p);ring.style.stroke=due?'var(--gold)':'var(--green)'}
+ if(due&&$('session')&&!$('session').classList.contains('open')){$('dueBanner').classList.add('show');if(!dueFlag){dueFlag=true;try{if('Notification'in window&&Notification.permission==='granted')new Notification('Компаунд',{body:'Пора учиться: '+nextLesson()?.title})}catch(e){}}}
  else $('dueBanner').classList.remove('show');
  if(session){const s=Math.floor((Date.now()-session.start)/1000);$('sTimer').textContent=`${pad(Math.floor(s/60))}:${pad(s%60)}`}
 }
 
+/* ---------- файлы ---------- */
 function download(name,text,type='application/json'){const b=new Blob([text],{type}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),3000)}
-function exportAll(){download(`compound-backup-${today()}.json`,JSON.stringify({app:'compound',version:1,exported:new Date().toISOString(),state:S},null,2));toast('Резервная копия сохранена','💾')}
-function template(){const t={title:'Название курса',modules:[{id:'m1',title:'Основы',color:'#4DA6FF',icon:'📘'}],lessons:[{id:'l1',module:'m1',title:'Первый урок',minutes:6,summary:'Что вы узнаете',blocks:[{t:'p',text:'Текст объяснения.'},{t:'ul',items:['Пункт 1','Пункт 2']},{t:'tip',text:'Практический совет.'}],quiz:[{q:'Вопрос?',a:['Вариант 1','Вариант 2','Вариант 3','Вариант 4'],c:1,x:'Объяснение.'}]}]};download('course-template.json',JSON.stringify(t,null,2));toast('Шаблон курса сохранён','📄')}
-function sanitizeCourse(d){
- if(!d||!Array.isArray(d.modules)||!Array.isArray(d.lessons))throw 0;
- const modules=d.modules.filter(m=>m&&m.id&&m.title).map(m=>({id:String(m.id),title:String(m.title).slice(0,50),color:/^#[0-9a-f]{6}$/i.test(m.color)?m.color:'#4DA6FF',icon:String(m.icon||'📘').slice(0,4)}));
- if(!modules.length)throw 0;
- const lessons=d.lessons.filter(l=>l&&l.title).map((l,i)=>{
-  const id=l.id?String(l.id):'imp-'+i+'-'+uid();
-  const blocks=Array.isArray(l.blocks)?l.blocks.filter(b=>b&&(b.t==='p'||b.t==='tip'||b.t==='warn'||b.t==='formula'||b.t==='candles'||b.t==='ul')).map(b=>b.t==='ul'?{t:'ul',items:(b.items||[]).map(String).slice(0,12)}:{t:b.t,text:String(b.text||'').slice(0,1200)}):parseText(String(l.text||''));
-  const quiz=Array.isArray(l.quiz)?l.quiz.filter(q=>q&&q.q&&Array.isArray(q.a)&&q.a.length>=2).map(q=>({q:String(q.q).slice(0,200),a:q.a.map(String).slice(0,6),c:clamp(+q.c||0,0,q.a.length-1),x:String(q.x||'').slice(0,400)})):[];
-  return {id,module:modules.some(m=>m.id===l.module)?String(l.module):modules[0].id,title:String(l.title).slice(0,90),minutes:clamp(+l.minutes||6,3,20),summary:String(l.summary||l.title).slice(0,160),blocks:blocks.length?blocks:[{t:'p',text:'Материал урока.'}],quiz,custom:true};
- });
- if(!lessons.length)throw 0;
- return {title:String(d.title||'Импортированный курс').slice(0,80),modules,lessons};
+function exportAll(){download(`compound-backup-${today()}.json`,JSON.stringify({app:'compound',version:3,exported:new Date().toISOString(),state:S},null,2));toast('Бэкап сохранён','💾')}
+function exportDB(){const lessons=S.lessons.map(({id,module,title,minutes,summary,blocks,quiz})=>({id,module,title,minutes,summary,blocks,quiz}));download('lessons.json',JSON.stringify({title:S.courseTitle,modules:S.modules,lessons},null,2));toast('База уроков сохранена','⛁')}
+function importFile(file){
+ const r=new FileReader();
+ r.onload=()=>{try{
+  const d=JSON.parse(r.result);
+  if(d.app==='compound'&&d.state){confirmBox('Восстановить бэкап?','Текущее состояние будет заменено. Можно отменить.','Восстановить').then(ok=>{if(!ok)return;pushUndo();S=d.state;S.settings={...defSettings(),...S.settings};S.ui={...seed().ui,...S.ui};S.sync={...seed().sync,...S.sync};tab=S.ui.tab||'home';baseSeg=S.ui.baseSeg||'sync';save();renderAll();toast('Бэкап восстановлен','📥',{label:'Отменить',fn:doUndo})});return}
+  const c=sanitizeCourse(d),r2=mergeCourse(c,'db');save();renderAll();sound('sync');
+  toast(`Импорт: +${r2.added} новых, ${r2.updated} обновлено`,'📥',{label:'Отменить',fn:doUndo});
+ }catch(e){toast('Ошибка JSON: '+e.message,'⚠️')}};
+ r.readAsText(file);
 }
-function importFile(file){const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);
- if(d.app==='compound'&&d.state){confirmBox('Восстановить резервную копию?','Текущее состояние приложения будет заменено. Можно отменить.','Восстановить').then(ok=>{if(!ok)return;pushUndo();S=d.state;S.settings={...defaultSettings(),...S.settings};tab=S.ui?.tab||'home';save();renderAll();toast('Копия восстановлена','📥',{label:'Отменить',fn:doUndo})});return}
- const c=sanitizeCourse(d);confirmBox('Импортировать курс?',`${c.lessons.length} уроков и ${c.modules.length} модулей заменят текущий курс. Прогресс будет сброшен. Можно отменить.`,'Импортировать').then(ok=>{if(!ok)return;pushUndo();S.courseTitle=c.title;S.modules=c.modules;S.lessons=c.lessons;S.order=c.lessons.map(l=>l.id);S.progress={};S.activity={};S.xp=0;S.nextDue=Date.now()+3600000;save();renderAll();toast('Курс импортирован','📚',{label:'Отменить',fn:doUndo})})
- }catch(e){toast('Не удалось прочитать JSON','⚠️')}};r.readAsText(file)}
-function resetCourse(){confirmBox('Вернуть встроенный курс?','Текущие уроки будут заменены стандартным курсом. Прогресс по совпадающим id сохранится. Можно отменить.','Вернуть').then(ok=>{if(!ok)return;pushUndo();S.courseTitle=COURSE.title;S.modules=clone(COURSE.modules);S.lessons=clone(COURSE.lessons);S.order=COURSE.lessons.map(l=>l.id);Object.keys(S.progress).forEach(id=>{if(!lesson(id))delete S.progress[id]});save();renderAll();toast('Стандартный курс возвращён','↺',{label:'Отменить',fn:doUndo})})}
-function wipeProgress(){confirmBox('Сбросить прогресс?','XP, история занятий и результаты уроков будут очищены. Уроки останутся. Можно отменить.','Сбросить').then(ok=>{if(!ok)return;pushUndo();S.progress={};S.activity={};S.xp=0;S.nextDue=Date.now()+3600000;save();renderAll();toast('Прогресс сброшен','🗑',{label:'Отменить',fn:doUndo})})}
+function wipeProgress(){confirmBox('Сбросить прогресс?','XP, история и результаты очистятся. Уроки останутся. Можно отменить.','Сбросить').then(ok=>{if(!ok)return;pushUndo();S.progress={};S.activity={};S.xp=0;S.nextDue=Date.now()+3600000;save();renderAll();toast('Прогресс сброшен','🗑',{label:'Отменить',fn:doUndo})})}
 function ics(){
  const sc=S.settings.schedule,hrs=reminderHours();if(!hrs.length){toast('Проверьте окно напоминаний','⚠️');return}
- const now=new Date();let first=new Date(now);first.setMinutes(0,0,0);const h=hrs.find(x=>x>now.getHours())??hrs[0];first.setHours(h);if(first<=now)first.setDate(first.getDate()+1);
+ const now=new Date(),first=new Date(now);first.setMinutes(0,0,0);
+ const h=hrs.find(x=>x>now.getHours())??hrs[0];first.setHours(h);if(first<=now)first.setDate(first.getDate()+1);
  const dt=d=>`${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}T${pad(d.getHours())}0000`;
- const end=new Date(first.getTime()+sc.length*60000);
- const stamp=new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
- const url=location.href.split('#')[0];
- const text=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Compound//Learning//RU','CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT',`UID:compound-${Date.now()}@local`,`DTSTAMP:${stamp}`,`DTSTART:${dt(first)}`,`DTEND:${dt(end)}`,`RRULE:FREQ=DAILY;BYHOUR=${hrs.join(',')};BYMINUTE=0;BYSECOND=0`,`SUMMARY:📚 Компаунд: ${sc.length} минут знаний`,`DESCRIPTION:Откройте приложение и пройдите короткий урок.\\n${url}`,`URL:${url}`,'BEGIN:VALARM','ACTION:DISPLAY','TRIGGER:PT0S','DESCRIPTION:Пора учиться','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
- download('compound-reminders.ics',text,'text/calendar;charset=utf-8');toast('Откройте файл и добавьте события в Календарь','🔔');
+ const end=new Date(first.getTime()+sc.length*60000),stamp=new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z',url=location.href.split('#')[0];
+ const text=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Compound//Learning//RU','CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT',`UID:compound-${Date.now()}@local`,`DTSTAMP:${stamp}`,`DTSTART:${dt(first)}`,`DTEND:${dt(end)}`,`RRULE:FREQ=DAILY;BYHOUR=${hrs.join(',')};BYMINUTE=0;BYSECOND=0`,`SUMMARY:📚 Компаунд: ${sc.length} минут знаний`,`DESCRIPTION:Откройте короткий урок.\\n${url}`,`URL:${url}`,'BEGIN:VALARM','ACTION:DISPLAY','TRIGGER:PT0S','DESCRIPTION:Пора учиться','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+ download('compound-reminders.ics',text,'text/calendar;charset=utf-8');toast('Добавьте события в Календарь iPhone','🔔');
+}
+async function copyPrompt(){
+ const t=$('promptOut').value||promptText();
+ try{await navigator.clipboard.writeText(t);toast('Промт скопирован','📋')}
+ catch(e){$('promptOut').value=t;$('promptOut').select();toast('Выделите и скопируйте текст вручную','📋')}
 }
 
+/* ---------- события ---------- */
 document.addEventListener('click',e=>{
- const el=e.target.closest('[data-action]');if(!el)return;const a=el.dataset.action,id=el.dataset.id;
+ const el=e.target.closest('[data-action]');if(!el)return;
+ const a=el.dataset.action,id=el.dataset.id;
  switch(a){
   case'tab':switchTab(el.dataset.tab);break;
+  case'base-seg':switchBase(el.dataset.seg);break;
   case'start':startSession();break;
-  case'sound':toggleSound();break;
+  case'sync':syncDB(true);break;
+  case'sound':S.settings.sound=!S.settings.sound;save();renderAll();if(S.settings.sound)sound('tap');toast(S.settings.sound?'Звук включён':'Звук выключен',S.settings.sound?'🔊':'🔇');break;
+  case'toggle-auto':S.settings.autoSync=!S.settings.autoSync;save();renderBase();break;
+  case'save-url':{const v=$('syncUrl').value.trim()||'lessons.json';S.sync.url=v;S.sync.status='idle';S.sync.msg='Адрес сохранён. Нажмите проверку.';save();renderBase();toast('Адрес базы сохранён','💾');break}
   case'snooze':S.nextDue=Date.now()+30*60000;dueFlag=false;save();updateClock();toast('Напомним через 30 минут','⏱');break;
   case'open-lesson':openLesson(id);break;
   case'study':startSession(id);break;
@@ -798,18 +833,25 @@ document.addEventListener('click',e=>{
   case'bulk':bulk=!bulk;sel.clear();renderLibrary();break;
   case'row-check':sel.has(id)?sel.delete(id):sel.add(id);renderLibrary();break;
   case'bulk-all':{const l=filtered();sel.size===l.length?sel.clear():l.forEach(x=>sel.add(x.id));renderLibrary();break}
-  case'bulk-del':if(!sel.size)break;confirmBox(`Удалить ${sel.size} ${plural(sel.size,'урок','урока','уроков')}?`,'Прогресс по ним тоже будет удалён. Можно отменить.','Удалить').then(ok=>{if(!ok)return;pushUndo();S.lessons=S.lessons.filter(l=>!sel.has(l.id));S.order=S.order.filter(x=>!sel.has(x));sel.forEach(x=>delete S.progress[x]);const n=sel.size;sel.clear();bulk=false;save();renderAll();toast(`Удалено: ${n}`,'🗑',{label:'Отменить',fn:doUndo})});break;
-  case'status':S.ui.filters.status=el.dataset.status;save();renderLibrary();break;
+  case'bulk-del':if(!sel.size)break;confirmBox(`Удалить ${sel.size} ${plural(sel.size,'урок','урока','уроков')}?`,'Прогресс по ним тоже удалится. Можно отменить.','Удалить').then(ok=>{if(!ok)return;pushUndo();S.lessons=S.lessons.filter(l=>!sel.has(l.id));S.order=S.order.filter(x=>!sel.has(x));sel.forEach(x=>delete S.progress[x]);const n=sel.size;sel.clear();bulk=false;save();renderAll();toast(`Удалено: ${n}`,'🗑',{label:'Отменить',fn:doUndo})});break;
+  case'status':S.ui.filters.status=el.dataset.status;S.ui.filters.source='all';save();renderLibrary();break;
+  case'source':S.ui.filters.source=S.ui.filters.source===el.dataset.source?'all':el.dataset.source;S.ui.filters.status='all';save();renderLibrary();break;
   case'clear-search':S.ui.filters.q='';save();renderLibrary();break;
-  case'reset-filters':S.ui.filters={q:'',module:'all',status:'all',sort:'manual'};save();renderLibrary();break;
+  case'reset-filters':S.ui.filters={q:'',module:'all',status:'all',source:'all',sort:'manual'};save();renderLibrary();break;
   case'up':moveLesson(id,-1);break;
   case'down':moveLesson(id,1);break;
+  case'view-toggle':viewRow=!viewRow;renderLibrary();break;
+  case'view-save':{const n=$('viewName').value.trim();if(!n){toast('Введите название вида','⚠️');break}S.ui.views.push({name:n,filters:clone(S.ui.filters)});viewRow=false;save();renderLibrary();toast('Вид сохранён','★');break}
+  case'view-apply':{const v=S.ui.views[+el.dataset.i];if(v){S.ui.filters=clone(v.filters);save();renderLibrary()}break}
+  case'view-del':{e.stopPropagation();S.ui.views.splice(+el.dataset.i,1);save();renderLibrary();break}
   case'export':exportAll();break;
+  case'export-db':exportDB();break;
   case'import':$('fileInput').click();break;
-  case'template':template();break;
-  case'reset-course':resetCourse();break;
   case'wipe':wipeProgress();break;
   case'ics':ics();break;
+  case'build-prompt':$('promptOut').value=promptText();toast('Промт собран','✨');break;
+  case'copy-prompt':copyPrompt();break;
+  case'save-prompt':download('compound-prompt.txt',$('promptOut').value||promptText(),'text/plain;charset=utf-8');toast('Промт сохранён','⬇︎');break;
   case'cf-yes':resolveConfirm(true);break;
   case'cf-no':resolveConfirm(false);break;
   case'toast-action':{const fn=$('toastAction')._fn;$('toast').classList.remove('show');if(fn)fn();break}
@@ -832,10 +874,11 @@ document.addEventListener('dragleave',e=>{const r=e.target.closest('[data-drag]'
 document.addEventListener('drop',e=>{const r=e.target.closest('[data-drag]');if(r&&dragId){e.preventDefault();const from=S.order.indexOf(dragId),to=S.order.indexOf(r.dataset.drag);if(from>-1&&to>-1){S.order.splice(from,1);S.order.splice(to,0,dragId);save();renderLibrary()}}dragId=null});
 document.addEventListener('dragend',()=>{dragId=null;$$('[data-drag]').forEach(r=>{r.style.opacity='';r.style.background=''})});
 
-function buildCandles(){const colors=['#2EE59D','#FF5C6C','#4DA6FF','#F5C451'];let h='';for(let i=0;i<18;i++){const x=Math.random()*100,y=20+Math.random()*70,height=20+Math.random()*70,c=colors[i%4];h+=`<span class="candle" style="left:${x}%;top:${y}%;height:${height}px;background:${c};animation-delay:${-Math.random()*18}s"></span>`}$('candles').innerHTML=h}
-function makeIcon(){try{const c=document.createElement('canvas');c.width=c.height=180;const x=c.getContext('2d');const g=x.createLinearGradient(0,0,180,180);g.addColorStop(0,'#10253A');g.addColorStop(1,'#070B14');x.fillStyle=g;x.fillRect(0,0,180,180);x.strokeStyle='#2EE59D';x.lineWidth=12;x.lineCap='round';x.beginPath();x.moveTo(35,130);x.lineTo(72,92);x.lineTo(103,108);x.lineTo(148,48);x.stroke();x.fillStyle='#F5C451';x.beginPath();x.arc(148,48,13,0,7);x.fill();x.fillStyle='rgba(77,166,255,.35)';x.fillRect(30,145,120,2);const url=c.toDataURL('image/png');$('appIcon').href=url;$('favIcon').href=url;const mf={name:'Компаунд — знания как актив',short_name:'Компаунд',display:'standalone',start_url:location.href,background_color:'#070B14',theme_color:'#070B14',icons:[{src:url,sizes:'180x180',type:'image/png'}]};const l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectURL(new Blob([JSON.stringify(mf)],{type:'application/manifest+json'}));document.head.appendChild(l)}catch(e){}}
+function buildCandles(){const c=['#2EE59D','#FF5C6C','#4DA6FF','#F5C451'];let h='';for(let i=0;i<18;i++)h+=`<span class="candle" style="left:${Math.random()*100}%;top:${20+Math.random()*70}%;height:${20+Math.random()*70}px;background:${c[i%4]};animation-delay:${-Math.random()*18}s"></span>`;$('candles').innerHTML=h}
+function makeIcon(){try{const c=document.createElement('canvas');c.width=c.height=180;const x=c.getContext('2d');const g=x.createLinearGradient(0,0,180,180);g.addColorStop(0,'#10253A');g.addColorStop(1,'#070B14');x.fillStyle=g;x.fillRect(0,0,180,180);x.strokeStyle='#2EE59D';x.lineWidth=12;x.lineCap='round';x.beginPath();x.moveTo(35,130);x.lineTo(72,92);x.lineTo(103,108);x.lineTo(148,48);x.stroke();x.fillStyle='#F5C451';x.beginPath();x.arc(148,48,13,0,7);x.fill();const url=c.toDataURL('image/png');$('appIcon').href=url;$('favIcon').href=url;const mf={name:'Компаунд — знания как актив',short_name:'Компаунд',display:'standalone',start_url:location.href,background_color:'#070B14',theme_color:'#070B14',icons:[{src:url,sizes:'180x180',type:'image/png'}]};const l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectURL(new Blob([JSON.stringify(mf)],{type:'application/manifest+json'}));document.head.appendChild(l)}catch(e){}}
 
 load();buildCandles();makeIcon();renderAll();setInterval(updateClock,1000);
+if(S.settings.autoSync)setTimeout(()=>syncDB(false),700);
 </script>
 </body>
 </html>
